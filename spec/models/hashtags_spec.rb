@@ -10,6 +10,29 @@ describe Hashtags do
     $client.query("TRUNCATE hashtags")
   end
 
+  describe "validity" do
+
+    context "#valid" do
+      it 'should valid' do
+        model = Hashtags.new({:content => '#database'})
+
+        expect(model.valid?).to be_truthy
+      end
+
+      it 'should not valid without #' do
+        model = Hashtags.new({:content => 'database'})
+
+        expect(model.valid?).to be_falsey
+      end
+
+      it 'should not valid only #' do
+        model = Hashtags.new({:content => '#'})
+
+        expect(model.valid?).to be_falsey
+      end
+    end
+  end
+
   describe "create" do
     context "#save" do
       it "should have correct query" do

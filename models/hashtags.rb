@@ -10,6 +10,8 @@ class Hashtags
   end
 
   def save
+    return false unless valid?
+
     client = create_db_client
     client.query("INSERT INTO hashtags (content, counter) VALUES ('#{content}', 1)")
     true
@@ -25,6 +27,13 @@ class Hashtags
     client = create_db_client
     result = client.query("SELECT * FROM hashtags WHERE updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT #{limit}")
     convert_sql_result_to_array(result)
+  end
+
+  def valid?
+    return false if @content.nil?
+    return false if @content.length < 2
+    return false if @content[0] != '#'
+    true
   end
 
   def self.convert_sql_result_to_array(result)
