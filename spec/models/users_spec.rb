@@ -56,5 +56,29 @@ describe Users do
         expect(model.valid_id?).to be_falsey
       end
     end
+
+    context "#valid_email" do
+      it 'should valid' do
+        model = Users.new({
+          id: 1,
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        expect(model.valid_email?).to be_truthy
+      end
+
+      it 'should not valid' do
+        model = Users.new({
+          id: 1,
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foobar'
+        })
+
+        expect(model.valid_email?).to be_falsey
+      end
+    end
   end
 end
