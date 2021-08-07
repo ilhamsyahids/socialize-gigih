@@ -311,6 +311,64 @@ describe Users do
         expect(last.email).to eq("bar@foo.com")
       end
     end
+
+    context "#find_by_id" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE id = 1")
+
+        user = Users.find_by_id(1)
+
+        expect(user).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Users.new({
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        model.save
+
+        user = Users.find_by_id(1)
+
+        expect(user.id).to eq(1)
+        expect(user.username).to eq("aaa")
+        expect(user.bio).to eq("Haloo")
+        expect(user.email).to eq("foo@bar.com")
+      end
+    end
+
+    context "#find_by_username" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM users WHERE username = 'ilhamsyahids'")
+
+        user = Users.find_by_username("ilhamsyahids")
+
+        expect(user).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Users.new({
+          username: 'ilhamsyahids',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        model.save
+
+        user = Users.find_by_username('ilhamsyahids')
+
+        expect(user.id).to eq(1)
+        expect(user.username).to eq("ilhamsyahids")
+        expect(user.bio).to eq("Haloo")
+        expect(user.email).to eq("foo@bar.com")
+      end
+    end
   end
 
 end

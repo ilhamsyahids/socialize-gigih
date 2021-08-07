@@ -10,6 +10,18 @@ class Users
     @bio = params[:bio]
   end
 
+  def self.find_by_username(username)
+    client = create_db_client
+    result = client.query("SELECT * FROM users WHERE username = '#{username}'")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.find_by_id(id)
+    client = create_db_client
+    result = client.query("SELECT * FROM users WHERE id = #{id}")
+    convert_sql_result_to_array(result)[0]
+  end
+
   def self.find_all
     client = create_db_client
     result = client.query("SELECT * FROM users")
