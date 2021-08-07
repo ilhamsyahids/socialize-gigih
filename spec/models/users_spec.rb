@@ -278,6 +278,38 @@ describe Users do
 
         expect(Users.find_all).to eq([])
       end
+
+      it 'should find all from table' do
+        model = Users.new({
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        model.save
+
+        model = Users.new({
+          username: 'aba',
+          bio: 'hai',
+          email: 'bar@foo.com'
+        })
+        model.save
+
+        users = Users.find_all
+        expect(users.size).to eq(2)
+
+        first = users.first
+        expect(first.id).to eq(1)
+        expect(first.username).to eq("aaa")
+        expect(first.bio).to eq("Haloo")
+        expect(first.email).to eq("foo@bar.com")
+
+        last = users.last
+        expect(last.id).to eq(2)
+        expect(last.username).to eq("aba")
+        expect(last.bio).to eq("hai")
+        expect(last.email).to eq("bar@foo.com")
+      end
     end
   end
 
