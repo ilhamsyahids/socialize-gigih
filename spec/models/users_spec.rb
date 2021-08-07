@@ -226,4 +226,47 @@ describe Users do
     end
   end
 
+  describe "update" do
+    context "#update" do
+      it "should have correct query" do
+        model = Users.new({
+          id: 1,
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("UPDATE users SET username='#{model.username}', email='#{model.email}', bio='#{model.bio}' WHERE id=#{model.id}");
+
+        expect(model.update).to be_truthy
+      end
+
+      it "should update the table" do
+        model = Users.new({
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        model.save
+
+        model.id = 1
+        model.username = "abc"
+        model.email = "bar@foo.com"
+        model.bio = "hai"
+
+        expect(model.update).to be_truthy
+
+        result = $client.query("SELECT * FROM users")
+        user = result.first
+
+        expect(user["username"]).to eq("abc")
+        expect(user["email"]).to eq("bar@foo.com")
+        expect(user["bio"]).to eq("hai")
+      end
+    end
+  end
+
 end

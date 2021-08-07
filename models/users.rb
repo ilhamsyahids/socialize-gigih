@@ -30,6 +30,14 @@ class Users
     true
   end
 
+  def update
+    return false unless valid_all?
+
+    client = create_db_client
+    client.query("UPDATE users SET username='#{username}', email='#{email}', bio='#{bio}' WHERE id=#{id}")
+    true
+  end
+
   def valid_id?
     return false if id.nil?
     return false if id.to_i == 0
