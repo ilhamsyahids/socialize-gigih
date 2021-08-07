@@ -161,4 +161,38 @@ describe Users do
       end
     end
   end
+
+  describe "delete" do
+    context "#delete" do
+      it "should have correct query" do
+        model = Users.new({ id: 1 })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("DELETE FROM users WHERE id = #{model.id}");
+
+        expect(model.delete).to be_truthy
+      end
+
+      it "should delete from table" do
+        model = Users.new({
+          id: 1,
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        model.save
+
+        result = $client.query("SELECT * FROM users")
+        expect(result.size).to eq(1)
+
+        model.delete
+
+        result = $client.query("SELECT * FROM users")
+        expect(result.size).to eq(0)
+      end
+    end
+  end
+
 end

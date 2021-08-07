@@ -18,6 +18,14 @@ class Users
     true
   end
 
+  def delete
+    return false unless valid_id?
+
+    client = create_db_client
+    client.query("DELETE FROM users WHERE id = #{@id}")
+    true
+  end
+
   def valid_id?
     return false if id.nil?
     return false if id.to_i == 0
