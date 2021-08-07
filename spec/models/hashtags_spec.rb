@@ -69,6 +69,39 @@ describe Hashtags do
     end
   end
 
+  describe "update" do
+    context "#add_counter" do
+      it "should have correct query" do
+        model = Hashtags.new({
+          content: "#database"
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("UPDATE hashtags SET counter = counter + 1 WHERE content = '#{model.content}'")
+
+        expect(model.add_counter).to be_truthy
+      end
+
+      it "should increment counter in database" do
+        model = Hashtags.new({
+          content: "#database"
+        })
+
+        model.save
+
+        hashtags = Hashtags.find_by_content('#database')
+
+        hashtags.add_counter
+        hashtags.add_counter
+
+        hashtags = Hashtags.find_by_content('#database')
+
+        expect(hashtags.counter).to eq(3)
+      end
+    end
+  end
+
   describe "searching" do
     context "#trending" do
       it "should have correct query" do
