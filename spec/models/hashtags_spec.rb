@@ -23,6 +23,26 @@ describe Hashtags do
 
         expect(model.save).to be_truthy
       end
+
+      it "should insert into table" do
+        model = Hashtags.new({
+          content: "#database"
+        })
+
+        time_now = Time.now
+        model.save
+
+        hashtags = $client.query("SELECT * FROM hashtags")
+        expect(hashtags.size).to eq(1)
+
+        first_hashtag = hashtags.first
+
+        time_diff = (time_now - first_hashtag["updated_at"]).to_i
+
+        expect(first_hashtag["content"]).to eq("#database")
+        expect(first_hashtag["counter"]).to eq(1)
+        expect(time_diff).to eq(0)
+      end
     end
   end
 
