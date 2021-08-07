@@ -9,6 +9,12 @@ class Hashtags
     @updated_at = params[:updated_at]
   end
 
+  def self.find_by_content(content)
+    client = create_db_client
+    result = client.query("SELECT * FROM hashtags WHERE content = '#{content}'")
+    convert_sql_result_to_array(result)[0]
+  end
+
   def self.trending(limit = 5)
     client = create_db_client
     result = client.query("SELECT * FROM hashtags WHERE updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT #{limit}")

@@ -11,7 +11,7 @@ describe Hashtags do
   end
 
   describe "searching" do
-    context "trending hashtags" do
+    context "#trending" do
       it "should have correct query" do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
@@ -33,6 +33,30 @@ describe Hashtags do
 
         expect(hashtags.size).to eq(2)
         expect(first_hashtag.content).to eq('#mysql')
+      end
+    end
+
+    context "#find_by_content" do
+      it "should have correct query" do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM hashtags WHERE content = '#database'")
+
+        expect(Hashtags.find_by_content('#database')).to eq(nil)
+      end
+
+      it "should find hashtags" do
+        time_now = Time.now
+        $client.query("INSERT INTO hashtags (content, counter, updated_at) VALUES ('#mysql', 1000, NOW() - INTERVAL 23 HOUR)")
+
+        hashtags = Hashtags.find_by_content('#mysql')
+
+        time_diff = time_now - hashtags.updated_at
+        time_23_hours_ago = 23 * 60 * 60
+
+        expect(hashtags.content).to eq('#mysql')
+        expect(hashtags.counter).to eq(1000)
+        expect(time_diff.to_i).to eq(time_23_hours_ago)
       end
     end
   end
