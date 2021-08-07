@@ -10,6 +10,12 @@ class Users
     @bio = params[:bio]
   end
 
+  def self.find_all
+    client = create_db_client
+    result = client.query("SELECT * FROM users")
+    convert_sql_result_to_array(result)
+  end
+
   def save
     return false unless valid?
     
@@ -60,5 +66,18 @@ class Users
     return false unless valid?
     return false unless valid_id?
     true
+  end
+
+  def self.convert_sql_result_to_array(result)
+    data = []
+    result.each do |row|
+      data << Users.new({
+        username: row['username'],
+        bio: row['bio'],
+        email: row['email'],
+        id: row['id']
+      })
+    end if !result.nil? && result.size > 0
+    data
   end
 end

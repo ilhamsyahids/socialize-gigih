@@ -269,4 +269,16 @@ describe Users do
     end
   end
 
+  describe "searching" do
+    context "#find_all" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM users")
+
+        expect(Users.find_all).to eq([])
+      end
+    end
+  end
+
 end
