@@ -125,4 +125,40 @@ describe Users do
       end
     end
   end
+
+  describe "create" do
+    context "#save" do
+      it "should have correct query" do
+        model = Users.new({
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("INSERT INTO users (username, email, bio) VALUES ('#{model.username}', '#{model.email}', '#{model.bio}')");
+
+        expect(model.save).to be_truthy
+      end
+
+      it "should insert into table" do
+        model = Users.new({
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        model.save
+
+        result = $client.query("SELECT * FROM users")
+        expect(result.size).to eq(1)
+
+        user = result.first
+        expect(user["username"]).to eq('aaa')
+        expect(user["email"]).to eq('foo@bar.com')
+        expect(user["bio"]).to eq('Haloo')
+      end
+    end
+  end
 end
