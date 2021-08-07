@@ -80,6 +80,23 @@ class Users
     true
   end
 
+  def self.convert_model_to_json(data)
+    {
+      id: data.id,
+      username: data.username,
+      email: data.email,
+      bio: data.bio
+    }
+  end
+
+  def self.convert_models_to_json(data)
+    array = []
+    data.each do |row|
+      array << Users.convert_model_to_json(row)
+    end
+    { users: array }
+  end
+
   def self.convert_sql_result_to_array(result)
     data = []
     result.each do |row|

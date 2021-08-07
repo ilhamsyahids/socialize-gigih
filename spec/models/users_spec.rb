@@ -371,4 +371,20 @@ describe Users do
     end
   end
 
+  describe "utils" do
+    context "convert model user to json" do
+      it "should convert correct to json" do
+        array = Array.new([
+          Users.new({ id: 1, email: 'foo@bar.com', bio: 'Haloo', username: 'aaa' }),
+          Users.new({ id: 2, email: 'bar@bar.com', bio: 'hai', username: 'aba' })
+        ])
+  
+        json = Users.convert_models_to_json(array).to_json
+        json_expected = "{\"users\":[{\"id\":1,\"username\":\"aaa\",\"email\":\"foo@bar.com\",\"bio\":\"Haloo\"},{\"id\":2,\"username\":\"aba\",\"email\":\"bar@bar.com\",\"bio\":\"hai\"}]}"
+  
+        expect(json).to eq(json_expected)
+      end
+    end
+  end
+
 end
