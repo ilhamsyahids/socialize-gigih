@@ -10,6 +10,22 @@ describe Hashtags do
     $client.query("TRUNCATE hashtags")
   end
 
+  describe "create" do
+    context "#save" do
+      it "should have correct query" do
+        model = Hashtags.new({
+          content: "#database"
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("INSERT INTO hashtags (content, counter) VALUES ('#{model.content}', 1)")
+
+        expect(model.save).to be_truthy
+      end
+    end
+  end
+
   describe "searching" do
     context "#trending" do
       it "should have correct query" do

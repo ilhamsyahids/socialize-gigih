@@ -9,6 +9,12 @@ class Hashtags
     @updated_at = params[:updated_at]
   end
 
+  def save
+    client = create_db_client
+    client.query("INSERT INTO hashtags (content, counter) VALUES ('#{content}', 1)")
+    true
+  end
+
   def self.find_by_content(content)
     client = create_db_client
     result = client.query("SELECT * FROM hashtags WHERE content = '#{content}'")
