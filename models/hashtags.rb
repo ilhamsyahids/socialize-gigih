@@ -25,6 +25,14 @@ class Hashtags
     true
   end
 
+  def reset_counter
+    return false unless valid?
+
+    client = create_db_client
+    client.query("UPDATE hashtags SET counter = 1 WHERE content = '#{content}'")
+    true
+  end
+
   def self.find_by_content(content)
     client = create_db_client
     result = client.query("SELECT * FROM hashtags WHERE content = '#{content}'")
