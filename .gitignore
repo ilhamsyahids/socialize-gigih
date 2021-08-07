@@ -1,0 +1,7 @@
+
+# Folder
+coverage/
+.vscode
+
+# File
+.DS_STORE
