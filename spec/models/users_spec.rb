@@ -81,6 +81,29 @@ describe Users do
       end
     end
 
+    context "#valid_all" do
+      it 'should valid' do
+        model = Users.new({
+          id: 1,
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        expect(model.valid_all?).to be_truthy
+      end
+
+      it 'should not valid' do
+        model = Users.new({
+          username: 'aaa',
+          bio: 'Haloo',
+          email: 'foo@bar.com'
+        })
+
+        expect(model.valid_all?).to be_falsey
+      end
+    end
+
     context "#valid" do
       it 'should valid' do
         model = Users.new({
@@ -96,7 +119,6 @@ describe Users do
         model = Users.new({
           username: 'aaa',
           bio: 'Haloo',
-          email: 'foobar'
         })
 
         expect(model.valid?).to be_falsey

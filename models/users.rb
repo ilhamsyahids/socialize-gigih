@@ -27,4 +27,10 @@ class Users
     return false if @bio.nil?
     true
   end
+
+  def valid_all?
+    return false unless valid?
+    return false unless valid_id?
+    true
+  end
 end
