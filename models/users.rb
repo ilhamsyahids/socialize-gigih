@@ -21,8 +21,12 @@ class Users
   def delete
     return false unless valid_id?
 
+    Users.remove_by_id(@id)
+  end
+
+  def self.remove_by_id(id)
     client = create_db_client
-    client.query("DELETE FROM users WHERE id = #{@id}")
+    client.query("DELETE FROM users WHERE id = #{id}")
     true
   end
 
