@@ -20,4 +20,11 @@ class Users
   def valid_email?
     (email =~ /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i)
   end
+
+  def valid?
+    return false if @username.nil?
+    return false unless valid_email?
+    return false if @bio.nil?
+    true
+  end
 end
