@@ -223,4 +223,70 @@ describe Posts do
       end
     end
   end
+
+  describe "delete" do
+    context "#delete" do
+      it "should have correct query" do
+        model = Posts.new({ id: 1 })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("DELETE FROM posts WHERE id = #{model.id}");
+
+        expect(model.delete).to be_truthy
+      end
+
+      it "should delete from table" do
+        model = Posts.new({
+          user_id: 1,
+          content: "database",
+          url: 'http://example.com'
+        })
+
+        model.save
+
+        result = $client.query("SELECT * FROM posts")
+        expect(result.size).to eq(1)
+
+        model.id = 1
+
+        model.delete
+
+        result = $client.query("SELECT * FROM posts")
+        expect(result.size).to eq(0)
+      end
+    end
+
+    context "#remove_by_id" do
+      it "should have correct query" do
+        model = Posts.new({ id: 1 })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("DELETE FROM posts WHERE id = #{model.id}");
+
+        expect(Posts.remove_by_id(model.id)).to be_truthy
+      end
+
+      it "should delete from table" do
+        model = Posts.new({
+          id: 1,
+          user_id: 1,
+          content: 'aaa',
+          url: 'http://example.com'
+        })
+
+        model.save
+
+        result = $client.query("SELECT * FROM posts")
+        expect(result.size).to eq(1)
+
+        Posts.remove_by_id(model.id)
+
+        result = $client.query("SELECT * FROM posts")
+        expect(result.size).to eq(0)
+      end
+    end
+  end
+
 end

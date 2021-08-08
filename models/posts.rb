@@ -28,6 +28,19 @@ class Posts
     true
   end
 
+  def delete
+    return false unless valid_id?
+
+    client = create_db_client
+    client.query("DELETE FROM posts WHERE id = #{@id}")
+    true
+  end
+
+  def self.remove_by_id(id)
+    Posts.new({ id: id }).delete
+    true
+  end
+
   def valid_url?
     return true if @url.nil? || @url.empty?
 
