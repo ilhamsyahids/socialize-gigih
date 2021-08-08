@@ -20,6 +20,14 @@ class Posts
     true
   end
 
+  def update
+    return false unless valid?
+
+    client = create_db_client
+    client.query("UPDATE posts SET content = '#{@content}', url = '#{@url}' WHERE id = #{@id}")
+    true
+  end
+
   def valid_url?
     return true if @url.nil? || @url.empty?
 

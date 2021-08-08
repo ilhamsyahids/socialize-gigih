@@ -184,4 +184,43 @@ describe Posts do
       end
     end
   end
+
+  describe "update" do
+    context "#update" do
+      it "should have correct query" do
+        model = Posts.new({
+          content: "#database",
+          url: 'http://example.com'
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("UPDATE posts SET content = '#{model.content}', url = '#{model.url}' WHERE id = #{model.id}")
+
+        expect(model.update).to be_truthy
+      end
+
+      it "should updated in database" do
+        model = Posts.new({
+          user_id: 1,
+          content: "ini adalah #database"
+        })
+
+        model.save
+
+        model.id = 1
+        model.content = "ini merupakan #mysql"
+        model.url = 'http://example.com'
+
+        model.update
+
+        posts = $client.query("SELECT * FROM posts")
+        
+        first_model = posts.first
+
+        expect(first_model["content"]).to eq("ini merupakan #mysql")
+        expect(first_model["url"]).to eq('http://example.com')
+      end
+    end
+  end
 end
