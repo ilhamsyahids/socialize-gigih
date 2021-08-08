@@ -12,6 +12,14 @@ class Posts
     @url = params[:url]
   end
 
+  def save
+    return false unless valid?
+
+    client = create_db_client
+    client.query("INSERT INTO posts (user_id, content, url) VALUES (#{@user_id}, '#{@content}', '#{@url}')")
+    true
+  end
+
   def valid_url?
     return true if @url.nil? || @url.empty?
 

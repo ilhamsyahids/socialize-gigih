@@ -5,6 +5,11 @@ require_relative '../../models/posts.rb'
 require_relative '../../db/db_connector.rb'
 
 describe Posts do
+  before(:each) do
+    $client = create_db_client
+    $client.query("TRUNCATE posts")
+  end
+
   describe "validity" do
     context "#valid" do
       describe 'by email' do
@@ -145,4 +150,38 @@ describe Posts do
     end
   end
 
+  describe "create" do
+    context "#save" do
+      it "should have correct query" do
+        model = Posts.new({
+          user_id: 1,
+          content: 'a'
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("INSERT INTO posts (user_id, content, url) VALUES (#{model.user_id}, '#{model.content}', '#{model.url}')")
+
+        expect(model.save).to be_truthy
+      end
+
+      it "should insert into table" do
+        model = Posts.new({
+          user_id: 1,
+          content: 'a'
+        })
+
+        model.save
+
+        posts = $client.query("SELECT * FROM posts")
+        expect(posts.size).to eq(1)
+
+        first_model = posts.first
+
+        expect(first_model["content"]).to eq("a")
+        expect(first_model["user_id"]).to eq("1")
+        expect(first_model["url"]).to eq('')
+      end
+    end
+  end
 end
