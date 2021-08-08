@@ -179,7 +179,7 @@ describe Posts do
         first_model = posts.first
 
         expect(first_model["content"]).to eq("a")
-        expect(first_model["user_id"]).to eq("1")
+        expect(first_model["user_id"]).to eq(1)
         expect(first_model["url"]).to eq('')
       end
     end
