@@ -289,4 +289,133 @@ describe Posts do
     end
   end
 
+  describe "searching" do
+    context "#find_all" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts")
+
+        expect(Posts.find_all).to eq([])
+      end
+
+      it 'should find all from table' do
+        model = Posts.new({
+          user_id: 1,
+          content: "ini adalah #database",
+          url: 'http://example.com'
+        })
+
+        model.save
+
+        model = Posts.new({
+          user_id: 2,
+          content: "ini adalah #mysql"
+        })
+        model.save
+
+        posts = Posts.find_all
+        expect(posts.size).to eq(2)
+
+        first = posts.first
+        expect(first.id).to eq(1)
+        expect(first.user_id).to eq(1)
+        expect(first.content).to eq("ini adalah #database")
+        expect(first.url).to eq("http://example.com")
+
+        last = posts.last
+        expect(last.id).to eq(2)
+        expect(last.user_id).to eq(2)
+        expect(last.content).to eq("ini adalah #mysql")
+        expect(last.url).to eq("")
+      end
+    end
+
+    context "#find_by_id" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE id = 1")
+
+        post = Posts.find_by_id(1)
+
+        expect(post).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Posts.new({
+          user_id: 1,
+          content: "ini adalah #database",
+          url: 'http://example.com'
+        })
+
+        model.save
+
+        post = Posts.find_by_id(1)
+
+        expect(post.id).to eq(1)
+        expect(post.user_id).to eq(1)
+        expect(post.content).to eq("ini adalah #database")
+        expect(post.url).to eq("http://example.com")
+      end
+    end
+
+    context "#find_by_user_id" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE user_id = 1")
+
+        post = Posts.find_by_user_id(1)
+
+        expect(post).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Posts.new({
+          user_id: 2,
+          content: "ini adalah #database",
+          url: 'http://example.com'
+        })
+
+        model.save
+
+        post = Posts.find_by_user_id(2)
+
+        expect(post.id).to eq(1)
+        expect(post.user_id).to eq(2)
+        expect(post.content).to eq("ini adalah #database")
+        expect(post.url).to eq("http://example.com")
+      end
+    end
+
+    context "#find_by_hashtag" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content LIKE '%#database%'")
+
+        post = Posts.find_by_hashtag('#database')
+
+        expect(post).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Posts.new({
+          user_id: 2,
+          content: "ini adalah #database",
+          url: 'http://example.com'
+        })
+
+        model.save
+
+        post = Posts.find_by_hashtag('#database')
+
+        expect(post.id).to eq(1)
+        expect(post.user_id).to eq(2)
+        expect(post.content).to eq("ini adalah #database")
+        expect(post.url).to eq("http://example.com")
+      end
+    end
+  end
 end

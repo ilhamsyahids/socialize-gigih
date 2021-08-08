@@ -41,6 +41,44 @@ class Posts
     true
   end
 
+  def self.find_all
+    client = create_db_client
+    result = client.query("SELECT * FROM posts")
+    convert_sql_result_to_array(result)
+  end
+
+  def self.find_by_id(id)
+    client = create_db_client
+    result = client.query("SELECT * FROM posts WHERE id = #{id}")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.find_by_user_id(user_id)
+    client = create_db_client
+    result = client.query("SELECT * FROM posts WHERE user_id = #{user_id}")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.find_by_hashtag(hashtag)
+    client = create_db_client
+    result = client.query("SELECT * FROM posts WHERE content LIKE '%#{hashtag}%'")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.convert_sql_result_to_array(result)
+    data = []
+    result.each do |row|
+      data << Posts.new({
+        content: row['content'],
+        url: row['url'],
+        created_at: row['created_at'],
+        user_id: row['user_id'],
+        id: row['id']
+      })
+    end if !result.nil? && result.size > 0
+    data
+  end
+
   def valid_url?
     return true if @url.nil? || @url.empty?
 
