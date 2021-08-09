@@ -25,6 +25,14 @@ class Hashtags
     true
   end
 
+  def min_counter
+    return false unless valid?
+
+    client = create_db_client
+    client.query("UPDATE hashtags SET counter = counter - 1 WHERE content = '#{content}'")
+    true
+  end
+
   def reset_counter
     return false unless valid?
 
