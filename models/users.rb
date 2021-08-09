@@ -1,13 +1,15 @@
 require_relative '../db/db_connector.rb'
+require_relative '../models/posts.rb'
 
 class Users
-  attr_accessor :id, :username, :email, :bio
+  attr_accessor :id, :username, :email, :bio, :posts
 
   def initialize(params = {})
     @id = params[:id]
     @username = params[:username]
     @email = params[:email]
     @bio = params[:bio]
+    @posts = []
   end
 
   def self.find_by_username(username)
@@ -26,6 +28,11 @@ class Users
     client = create_db_client
     result = client.query("SELECT * FROM users")
     convert_sql_result_to_array(result)
+  end
+
+  def add_post(params)
+    params[:user_id] = @id
+    Posts.new(params).save
   end
 
   def save

@@ -371,6 +371,34 @@ describe Users do
     end
   end
 
+  describe 'add post' do
+    before(:each) do
+      $client.query("TRUNCATE posts")
+    end
+
+    context '#add_post' do
+      it 'should insert into table' do
+        user = Users.new({
+          id: 1
+        })
+
+        response = user.add_post({
+          content: 'Haloo',
+          url: 'google.com'
+        })
+        expect(response).to be_truthy
+        
+        result = $client.query("SELECT * FROM posts")
+
+        expect(result.size).to eq(1)
+
+        expect(result.first["content"]).to eq('Haloo')
+        expect(result.first["url"]).to eq('google.com')
+        expect(result.first["user_id"]).to eq(1)
+      end
+    end
+  end
+
   describe "utils" do
     context "convert model user to json" do
       it "should convert correct to json" do
