@@ -1,0 +1,17 @@
+language: python
+python:
+- '2.7'
+branches:
+  only:
+  - master
+before_install:
+- openssl aes-256-cbc -K $encrypted_601d7e596fa0_key -iv $encrypted_601d7e596fa0_iv
+  -in id_ed25519.enc -out ~/.ssh/id_ed25519 -d
+- chmod 400 ~/.ssh/id_ed25519
+install:
+- pip install ansible
+jobs:
+  include:
+  - stage: deploy-gcp
+    script: ansible-playbook -i inventory.yml playbook.yml  --user
+      $ANSIBLE_USER --private-key ~/.ssh/id_ed25519

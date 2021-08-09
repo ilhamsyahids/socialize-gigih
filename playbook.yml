@@ -1,0 +1,89 @@
+- hosts: all
+  tasks:
+    - name: Updating repositories
+      become: yes
+      apt:
+        update_cache: yes
+    - name: Upgrading packages
+      become: yes
+      apt:
+        name: "*"
+        state: latest
+    - name: Installing dependencies package linux
+      become: yes
+      apt:
+        autoclean: yes
+        autoremove: yes
+        install_recommends: no
+        name:
+          - curl
+          - autoconf
+          - bison
+          - build-essential
+          - libssl-dev
+          - libyaml-dev
+          - libmysqlclient-dev
+          - libreadline6-dev
+          - zlib1g-dev
+          - libncurses5-dev
+          - libffi-dev
+          - libgdbm6
+          - libgdbm-dev
+          - libdb-dev
+          - mysql-server
+          - python3-pymysql
+    - name: Install rbenv
+      shell: curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash
+    - name: Installing ruby 2.7.1
+      shell: $HOME/.rbenv/bin/rbenv install 2.7.1 -s
+    - name: Setting ruby 2.7.1 as global
+      shell: $HOME/.rbenv/bin/rbenv global 2.7.1
+    - name: Installing mysql2 and sinatra
+      become: yes
+      shell: gem install mysql2 sinatra
+    - name: Clone project
+      become: yes
+      git:
+        repo: https://github.com/ilhamsyahids/socialize-gigih.git
+        depth: "1"
+        dest: /socialize
+        force: yes
+    - name: Creating database user 'gbe01078' and password 'gbe01078' with all privileges
+      become: yes
+      mysql_user:
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+        name: gbe01078
+        password: gbe01078
+        priv: "*.*:ALL"
+    - name: Creating database 'socialize_db'
+      mysql_db:
+        login_password: gbe01078
+        login_user: gbe01078
+        name: socialize_db
+    - name: Importing 'socialize_db.sql'
+      mysql_db:
+        login_password: gbe01078
+        login_user: gbe01078
+        name: socialize_db
+        state: import
+        target: /socialize/socialize_db.sql
+    - name: Copying 'socialize.service' file to /etc/systemd/system
+      become: yes
+      shell:
+        chdir: /socialize
+        cmd: cp socialize.service /etc/systemd/system
+    - name: Systemctl Daemon Reload
+      become: yes
+      systemd:
+        daemon_reload: true
+    - name: Enabling Socialize application
+      become: yes
+      systemd:
+        force: true
+        enabled: yes
+        name: socialize
+    - name: Starting Socialize application
+      become: yes
+      systemd:
+        name: socialize
+        state: restarted

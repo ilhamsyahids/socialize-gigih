@@ -1,0 +1,16 @@
+[Unit]
+Description=Socialize application
+
+[Service]
+User=gbe01078
+WorkingDirectory=/socialize
+ExecStart=/home/gbe01078/.rbenv/shims/ruby main.rb -o 0.0.0.0 -p 3000
+Restart=on-failure
+Environment="ENV=production"
+Environment="DB_HOST=localhost"
+Environment="DB_USERNAME=gbe01078"
+Environment="DB_PASSWORD=gbe01078"
+Environment="DB_DATABASE=socialize_db"
+
+[Install]
+WantedBy=multi-user.target
