@@ -82,7 +82,7 @@ class Posts
   def valid_url?
     return true if @url.nil? || @url.empty?
 
-    regex = "((http|https)://)(www.)?"
+    regex = "((http|https)://)?(www.)?"
     regex += "[a-zA-Z0-9@:%._\\+~#?&//=]"
     regex += "{2,256}\\.[a-z]"
     regex += "{2,6}\\b([-a-zA-Z0-9@:%"
