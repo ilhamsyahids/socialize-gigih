@@ -1,5 +1,4 @@
 require 'sinatra'
-require 'sinatra/reloader'
 
 before do
   content_type :json
