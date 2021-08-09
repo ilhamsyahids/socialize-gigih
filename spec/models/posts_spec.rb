@@ -10,6 +10,10 @@ describe Posts do
     $client.query("TRUNCATE posts")
   end
 
+  after(:all) do
+    $client.query("TRUNCATE posts")
+  end
+
   describe "validity" do
     context "#valid" do
       describe 'by email' do

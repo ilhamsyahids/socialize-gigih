@@ -10,6 +10,11 @@ describe Users do
     $client.query("TRUNCATE users")
   end
 
+  after(:all) do
+    $client.query("TRUNCATE users")
+    $client.query("TRUNCATE posts")
+  end
+
   describe "validity" do
     context "#valid_id" do
       it 'positif integer should valid' do
