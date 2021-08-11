@@ -171,7 +171,14 @@ describe Hashtags do
       it "should have correct query" do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("SELECT * FROM hashtags WHERE updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT 5")
+        expect(mock_client).to receive(:query).with("SELECT * FROM hashtags WHERE counter > 1 AND updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT 5")
+
+        expect(Hashtags.trending).to eq([])
+      end
+
+      it 'should not find with counter 0' do
+        $client.query("INSERT INTO hashtags (content, counter, updated_at) VALUES ('#sql', 0, NOW() - INTERVAL 100 SECOND)")
+        $client.query("INSERT INTO hashtags (content, counter, updated_at) VALUES ('#database', 0, NOW() - INTERVAL 10 SECOND)")
 
         expect(Hashtags.trending).to eq([])
       end
