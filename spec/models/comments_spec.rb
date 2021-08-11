@@ -152,7 +152,7 @@ describe Comments do
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("INSERT INTO comments (user_id, post_id, content, attachment) VALUES (#{model.user_id}, #{model.post_id}, '#{model.content}', '#{model.attachment}')")
+        expect(mock_client).to receive(:query).with("INSERT INTO comments (user_id, post_id, content, attachment, attachment_name) VALUES (#{model.user_id}, #{model.post_id}, '#{model.content}', '#{model.attachment}', '#{model.attachment_name}')")
 
         expect(model.save).to be_truthy
       end
@@ -188,12 +188,13 @@ describe Comments do
           post_id: 1,
           user_id: 1,
           content: 'a',
-          attachment: 'png/a.png'
+          attachment: 'png/a.png',
+          attachment_name: 'aws.png'
         })
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("UPDATE comments SET content = '#{model.content}', attachment = '#{model.attachment}', updated_at = NOW() WHERE id = #{model.id}")
+        expect(mock_client).to receive(:query).with("UPDATE comments SET content = '#{model.content}', attachment = '#{model.attachment}', attachment_name = '#{model.attachment_name}', updated_at = NOW() WHERE id = #{model.id}")
 
         expect(model.update).to be_truthy
       end
