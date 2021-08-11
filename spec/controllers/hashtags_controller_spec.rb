@@ -62,4 +62,21 @@ describe HashtagsController do
     end
   end
 
+  describe '#decrement_counter' do
+    context 'when given content' do
+      it 'should decrease by 1' do
+        $client.query("INSERT INTO hashtags (content, counter) VALUES ('#database', 12)")
+        content = '#database'
+
+        $hashtags_controller.decrement_counter(content)
+
+        hashtag = Hashtags.find_by_content(content)
+
+        expect(hashtag).to_not be_nil
+        expect(hashtag.content).to eq(content)
+        expect(hashtag.counter).to eq(11)
+      end
+    end
+  end
+
 end

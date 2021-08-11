@@ -13,4 +13,8 @@ class HashtagsController
       time_diff.to_i > (24 * 60 * 60) ? hashtag.reset_counter : hashtag.add_counter
     end
   end
+
+  def decrement_counter(content)
+    Hashtags.new({ :content => content }).min_counter
+  end
 end
