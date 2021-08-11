@@ -25,6 +25,10 @@ class UsersController
     user
   end
 
+  def delete_user(id)
+    Users.remove_by_id(id)
+  end
+
   def edit_user(params)
     user = Users.new(params)
     user.update

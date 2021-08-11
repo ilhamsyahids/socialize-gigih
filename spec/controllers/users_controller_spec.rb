@@ -308,4 +308,27 @@ describe UsersController do
       end
     end
   end
+
+  describe '#delete_user' do
+    context 'when given valid id' do
+      it 'should deleted' do
+        params = {
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        id = $users_controller.create_item(params)
+
+        $users_controller.delete_user(id)
+
+        all_users = $users_controller.find_all_users
+
+        expect(all_users.size).to eq(0)
+      end
+    end
+  end
+
+
+
 end
