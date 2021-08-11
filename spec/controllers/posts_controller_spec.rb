@@ -1,4 +1,5 @@
 
+require_relative '../test_helper.rb'
 require_relative '../../models/posts'
 require_relative '../../controllers/posts_controller.rb'
 
@@ -54,6 +55,45 @@ describe PostsController do
         }
 
         expect($posts_controller.create_post(params)).to eq(false)
+      end
+    end
+  end
+
+  describe 'searching' do
+    context '#find_all' do
+      it 'should valid' do
+        expect($posts_controller.find_all).to eq([])
+
+        $posts_controller.create_post({ user_id: 1, content: '#database' })
+
+        expect($posts_controller.find_all.length).to eq(1)
+      end
+    end
+
+    context '#find_by_user_id' do
+      it 'should valid' do
+        expect($posts_controller.find_by_user_id(1)).to eq([])
+        $posts_controller.create_post({ user_id: 1, content: '#database' })
+        expect($posts_controller.find_by_user_id(1).length).to eq(1)
+      end
+    end
+
+    context '#find_by_hashtag' do
+      it 'should valid' do
+        expect($posts_controller.find_by_hashtag('database')).to eq([])
+        $posts_controller.create_post({ user_id: 1, content: '#database' })
+        expect($posts_controller.find_by_hashtag('database').length).to eq(1)
+      end
+    end
+
+    context '#find_by_id' do
+      it 'should valid' do
+        expect($posts_controller.find_by_id(1)).to eq(nil)
+        $posts_controller.create_post({ user_id: 1, content: '#database' })
+        post = $posts_controller.find_by_id(1)
+
+        expect(post.user_id).to eq(1)
+        expect(post.content).to eq('#database')
       end
     end
   end
