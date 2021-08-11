@@ -193,6 +193,7 @@ describe Posts do
     context "#update" do
       it "should have correct query" do
         model = Posts.new({
+          id: 1,
           content: "#database",
           url: 'http://example.com'
         })

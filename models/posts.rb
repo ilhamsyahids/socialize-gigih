@@ -22,6 +22,7 @@ class Posts
 
   def update
     return false unless valid?
+    return false unless valid_id?
 
     client = create_db_client
     client.query("UPDATE posts SET content = '#{@content}', url = '#{@url}' WHERE id = #{@id}")
