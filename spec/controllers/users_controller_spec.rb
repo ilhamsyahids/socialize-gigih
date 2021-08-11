@@ -186,7 +186,126 @@ describe UsersController do
         end
       end
     end
-
   end
 
+  describe '#edit_item' do
+    context 'when edit bio' do
+      it 'should edited' do
+        params = {
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        id = $users_controller.create_item(params)
+
+        params[:id] = id
+        params[:bio] = "hai"
+
+        $users_controller.edit_user(params)
+
+        user = $users_controller.find_users_by_id(id)
+  
+        expect(user.bio).to eq('hai')
+      end
+    end
+
+    context 'when edit username' do
+      it 'should edited' do
+        params = {
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        id = $users_controller.create_item(params)
+
+        params[:id] = id
+        params[:username] = "syahids"
+
+        $users_controller.edit_user(params)
+
+        user = $users_controller.find_users_by_id(id)
+  
+        expect(user.username).to eq('syahids')
+      end
+
+      it 'should not edited when already exists' do
+        params_user1 = {
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        params_user2 = {
+          username: 'syahids',
+          email: 'bar@foo.com',
+          bio: 'Haloo'
+        }
+
+        user1_id = $users_controller.create_item(params_user1)
+        $users_controller.create_item(params_user2)
+
+        params_user1[:id] = user1_id
+        params_user1[:username] = "syahids"
+
+        begin
+          $users_controller.edit_user(params_user1)
+        rescue Mysql2::Error => exception
+          response = exception.message
+        ensure
+          expect(response).to eql("Duplicate entry '#{params_user1[:username]}' for key 'username'")
+        end
+      end
+    end
+
+    context 'when edit username' do
+      it 'should edited' do
+        params = {
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        id = $users_controller.create_item(params)
+
+        params[:id] = id
+        params[:email] = "bar@foo.com"
+
+        $users_controller.edit_user(params)
+
+        user = $users_controller.find_users_by_id(id)
+  
+        expect(user.email).to eq('bar@foo.com')
+      end
+
+      it 'should not edited when already exists' do
+        params_user1 = {
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        params_user2 = {
+          username: 'syahids',
+          email: 'bar@foo.com',
+          bio: 'Haloo'
+        }
+
+        user1_id = $users_controller.create_item(params_user1)
+        $users_controller.create_item(params_user2)
+
+        params_user1[:id] = user1_id
+        params_user1[:email] = "bar@foo.com"
+
+        begin
+          $users_controller.edit_user(params_user1)
+        rescue Mysql2::Error => exception
+          response = exception.message
+        ensure
+          expect(response).to eql("Duplicate entry '#{params_user1[:email]}' for key 'email'")
+        end
+      end
+    end
+  end
 end

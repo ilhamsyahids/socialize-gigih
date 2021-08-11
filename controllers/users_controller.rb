@@ -24,4 +24,9 @@ class UsersController
     user.posts = Posts.find_by_user_id(user.id)
     user
   end
+
+  def edit_user(params)
+    user = Users.new(params)
+    user.update
+  end
 end
