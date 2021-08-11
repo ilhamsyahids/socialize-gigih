@@ -167,10 +167,10 @@ describe Comments do
 
         model.save
 
-        posts = $client.query("SELECT * FROM comments")
-        expect(posts.size).to eq(1)
+        comments = $client.query("SELECT * FROM comments")
+        expect(comments.size).to eq(1)
 
-        first_model = posts.first
+        first_model = comments.first
 
         expect(first_model["content"]).to eq("a")
         expect(first_model["post_id"]).to eq(1)
@@ -215,12 +215,79 @@ describe Comments do
 
         model.update
 
-        posts = $client.query("SELECT * FROM comments")
+        comments = $client.query("SELECT * FROM comments")
         
-        first_model = posts.first
+        first_model = comments.first
 
         expect(first_model["content"]).to eq("ini merupakan #mysql")
         expect(first_model["attachment"]).to eq('jpg/j.jpg')
+      end
+    end
+  end
+
+
+  describe "delete" do
+    context "#delete" do
+      it "should have correct query" do
+        model = Comments.new({ id: 1 })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("DELETE FROM comments WHERE id = #{model.id}");
+
+        expect(model.delete).to be_truthy
+      end
+
+      it "should delete from table" do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          content: "database",
+        })
+
+        model.save
+
+        result = $client.query("SELECT * FROM comments")
+        expect(result.size).to eq(1)
+
+        model.id = 1
+
+        model.delete
+
+        result = $client.query("SELECT * FROM comments")
+        expect(result.size).to eq(0)
+      end
+    end
+
+    context "#remove_by_id" do
+      it "should have correct query" do
+        model = Comments.new({ id: 1 })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("DELETE FROM comments WHERE id = #{model.id}");
+
+        expect(Comments.remove_by_id(model.id)).to be_truthy
+      end
+
+      it "should delete from table" do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          content: 'aaa'
+        })
+
+        model.save
+
+        model.id = 1
+
+        result = $client.query("SELECT * FROM comments")
+        expect(result.size).to eq(1)
+
+        Comments.remove_by_id(model.id)
+
+        result = $client.query("SELECT * FROM comments")
+        expect(result.size).to eq(0)
       end
     end
   end

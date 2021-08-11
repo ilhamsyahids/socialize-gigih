@@ -31,6 +31,19 @@ class Comments
     true
   end
 
+  def delete
+    return false unless valid_id?
+
+    client = create_db_client
+    client.query("DELETE FROM comments WHERE id = #{@id}")
+    true
+  end
+
+  def self.remove_by_id(id)
+    Comments.new({ id: id }).delete
+    true
+  end
+
   def valid_content?
     return false if @content.nil? || @content.empty? || @content.length > 1000
     true
