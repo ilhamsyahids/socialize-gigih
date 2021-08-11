@@ -10,6 +10,7 @@ class Comments
     @post_id = params[:post_id]
     @content = params[:content]
     @created_at = params[:created_at]
+    @updated_at = params[:updated_at]
     @attachment = params[:attachment]
     @attachment_name = params[:attachment_name]
   end
