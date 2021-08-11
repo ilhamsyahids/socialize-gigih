@@ -60,13 +60,13 @@ class Comments
   def self.find_by_post_id(post_id)
     client = create_db_client
     result = client.query("SELECT * FROM comments WHERE post_id = #{post_id}")
-    convert_sql_result_to_array(result)[0]
+    convert_sql_result_to_array(result)
   end
 
   def self.find_by_hashtag(hashtag)
     client = create_db_client
     result = client.query("SELECT * FROM comments WHERE content LIKE '%#{hashtag}%'")
-    convert_sql_result_to_array(result)[0]
+    convert_sql_result_to_array(result)
   end
 
   def self.convert_sql_result_to_array(result)

@@ -226,7 +226,6 @@ describe Comments do
     end
   end
 
-
   describe "delete" do
     context "#delete" do
       it "should have correct query" do
@@ -371,9 +370,9 @@ describe Comments do
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
         expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE post_id = 1")
 
-        post = Comments.find_by_post_id(1)
+        posts = Comments.find_by_post_id(1)
 
-        expect(post).to eq(nil)
+        expect(posts).to eq([])
       end
 
       it 'should find by id from table' do
@@ -385,7 +384,7 @@ describe Comments do
 
         model.save
 
-        post = Comments.find_by_post_id(2)
+        post = Comments.find_by_post_id(2).first
 
         expect(post.id).to eq(1)
         expect(post.post_id).to eq(2)
@@ -400,9 +399,9 @@ describe Comments do
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
         expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE content LIKE '%#database%'")
 
-        post = Comments.find_by_hashtag('#database')
+        posts = Comments.find_by_hashtag('#database')
 
-        expect(post).to eq(nil)
+        expect(posts).to eq([])
       end
 
       it 'should find by id from table' do
@@ -414,7 +413,7 @@ describe Comments do
 
         model.save
 
-        post = Comments.find_by_hashtag('#database')
+        post = Comments.find_by_hashtag('#database').first
 
         expect(post.id).to eq(1)
         expect(post.post_id).to eq(2)
