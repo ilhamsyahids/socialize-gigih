@@ -292,4 +292,135 @@ describe Comments do
     end
   end
 
+  describe "searching" do
+    context "#find_all" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM comments")
+
+        expect(Comments.find_all).to eq([])
+      end
+
+      it 'should find all from table' do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          content: "ini adalah #database"
+        })
+
+        model.save
+
+        model = Comments.new({
+          post_id: 2,
+          user_id: 2,
+          content: "ini adalah #mysql"
+        })
+        model.save
+
+        comments = Comments.find_all
+        expect(comments.size).to eq(2)
+
+        first = comments.first
+        expect(first.id).to eq(1)
+        expect(first.post_id).to eq(1)
+        expect(first.user_id).to eq(1)
+        expect(first.content).to eq("ini adalah #database")
+
+        last = comments.last
+        expect(last.id).to eq(2)
+        expect(last.post_id).to eq(2)
+        expect(last.user_id).to eq(2)
+        expect(last.content).to eq("ini adalah #mysql")
+      end
+    end
+
+    context "#find_by_id" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE id = 1")
+
+        post = Comments.find_by_id(1)
+
+        expect(post).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          content: "ini adalah #database"
+        })
+
+        model.save
+
+        post = Comments.find_by_id(1)
+
+        expect(post.id).to eq(1)
+        expect(post.post_id).to eq(1)
+        expect(post.user_id).to eq(1)
+        expect(post.content).to eq("ini adalah #database")
+      end
+    end
+
+    context "#find_by_post_id" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE post_id = 1")
+
+        post = Comments.find_by_post_id(1)
+
+        expect(post).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Comments.new({
+          post_id: 2,
+          user_id: 2,
+          content: "ini adalah #database"
+        })
+
+        model.save
+
+        post = Comments.find_by_post_id(2)
+
+        expect(post.id).to eq(1)
+        expect(post.post_id).to eq(2)
+        expect(post.user_id).to eq(2)
+        expect(post.content).to eq("ini adalah #database")
+      end
+    end
+
+    context "#find_by_hashtag" do
+      it 'should have correct query' do
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE content LIKE '%#database%'")
+
+        post = Comments.find_by_hashtag('#database')
+
+        expect(post).to eq(nil)
+      end
+
+      it 'should find by id from table' do
+        model = Comments.new({
+          post_id: 2,
+          user_id: 2,
+          content: "ini adalah #database",
+        })
+
+        model.save
+
+        post = Comments.find_by_hashtag('#database')
+
+        expect(post.id).to eq(1)
+        expect(post.post_id).to eq(2)
+        expect(post.user_id).to eq(2)
+        expect(post.content).to eq("ini adalah #database")
+      end
+    end
+  end
+
 end

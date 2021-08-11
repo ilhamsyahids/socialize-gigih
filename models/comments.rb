@@ -44,6 +44,47 @@ class Comments
     true
   end
 
+  def self.find_all
+    client = create_db_client
+    result = client.query("SELECT * FROM comments")
+    convert_sql_result_to_array(result)
+  end
+
+  def self.find_by_id(id)
+    client = create_db_client
+    result = client.query("SELECT * FROM comments WHERE id = #{id}")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.find_by_post_id(post_id)
+    client = create_db_client
+    result = client.query("SELECT * FROM comments WHERE post_id = #{post_id}")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.find_by_hashtag(hashtag)
+    client = create_db_client
+    result = client.query("SELECT * FROM comments WHERE content LIKE '%#{hashtag}%'")
+    convert_sql_result_to_array(result)[0]
+  end
+
+  def self.convert_sql_result_to_array(result)
+    data = []
+    result.each do |row|
+      data << Comments.new({
+        content: row['content'],
+        attachment: row['attachment'],
+        attachment_name: row['attachment_name'],
+        updated_at: row['updated_at'],
+        created_at: row['created_at'],
+        post_id: row['post_id'],
+        user_id: row['user_id'],
+        id: row['id']
+      })
+    end if !result.nil? && result.size > 0
+    data
+  end
+
   def valid_content?
     return false if @content.nil? || @content.empty? || @content.length > 1000
     true
