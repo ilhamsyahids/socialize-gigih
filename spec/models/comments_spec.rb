@@ -139,4 +139,45 @@ describe Comments do
       end
     end
   end
+
+  describe "create" do
+    context "#save" do
+      it "should have correct query" do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          content: 'a',
+          attachment: 'png/a.png'
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("INSERT INTO comments (user_id, post_id, content, attachment) VALUES (#{model.user_id}, #{model.post_id}, '#{model.content}', '#{model.attachment}')")
+
+        expect(model.save).to be_truthy
+      end
+
+      it "should insert into table" do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          content: 'a',
+          attachment: 'png/a.png'
+        })
+
+        model.save
+
+        posts = $client.query("SELECT * FROM comments")
+        expect(posts.size).to eq(1)
+
+        first_model = posts.first
+
+        expect(first_model["content"]).to eq("a")
+        expect(first_model["post_id"]).to eq(1)
+        expect(first_model["user_id"]).to eq(1)
+        expect(first_model["attachment"]).to eq('png/a.png')
+      end
+    end
+  end
+
 end
