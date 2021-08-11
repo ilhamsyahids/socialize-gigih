@@ -389,7 +389,8 @@ describe Users do
 
         response = user.add_post({
           content: 'Haloo',
-          url: 'google.com'
+          attachment: 'png/a.png',
+          attachment_name: 'aws.png'
         })
         expect(response).to be_truthy
         
@@ -398,7 +399,8 @@ describe Users do
         expect(result.size).to eq(1)
 
         expect(result.first["content"]).to eq('Haloo')
-        expect(result.first["url"]).to eq('google.com')
+        expect(result.first["attachment"]).to eq('png/a.png')
+        expect(result.first["attachment_name"]).to eq('aws.png')
         expect(result.first["user_id"]).to eq(1)
       end
     end
