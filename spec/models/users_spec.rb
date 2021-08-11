@@ -142,9 +142,10 @@ describe Users do
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        allow(mock_client).to receive(:last_id).and_return(1)
         expect(mock_client).to receive(:query).with("INSERT INTO users (username, email, bio) VALUES ('#{model.username}', '#{model.email}', '#{model.bio}')");
 
-        expect(model.save).to be_truthy
+        expect(model.save).to_not be_nil
       end
 
       it "should insert into table" do

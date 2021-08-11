@@ -20,7 +20,7 @@ class Comments
 
     client = create_db_client
     client.query("INSERT INTO comments (user_id, post_id, content, attachment, attachment_name) VALUES (#{user_id}, #{post_id}, '#{content}', '#{attachment}', '#{attachment_name}')")
-    true
+    client.last_id
   end
 
   def update

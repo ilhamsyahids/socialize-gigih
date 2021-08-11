@@ -19,7 +19,7 @@ class Posts
 
     client = create_db_client
     client.query("INSERT INTO posts (user_id, content, attachment, attachment_name) VALUES (#{user_id}, '#{content}', '#{attachment}', '#{attachment_name}')")
-    true
+    client.last_id
   end
 
   def update

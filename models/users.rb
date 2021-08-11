@@ -40,7 +40,7 @@ class Users
     
     client = create_db_client
     client.query("INSERT INTO users (username, email, bio) VALUES ('#{@username}', '#{@email}', '#{@bio}')");
-    true
+    client.last_id
   end
 
   def delete

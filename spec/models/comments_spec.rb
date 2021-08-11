@@ -152,9 +152,10 @@ describe Comments do
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        allow(mock_client).to receive(:last_id).and_return(1)
         expect(mock_client).to receive(:query).with("INSERT INTO comments (user_id, post_id, content, attachment, attachment_name) VALUES (#{model.user_id}, #{model.post_id}, '#{model.content}', '#{model.attachment}', '#{model.attachment_name}')")
 
-        expect(model.save).to be_truthy
+        expect(model.save).to_not be_nil
       end
 
       it "should insert into table" do
