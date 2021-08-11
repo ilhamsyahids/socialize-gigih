@@ -1,5 +1,6 @@
 
 require_relative '../db/db_connector.rb'
+require_relative '../models/comments.rb'
 
 class Posts
   attr_accessor :id, :user_id, :content, :created_at, :updated_at, :attachment, :attachment_name, :comments
@@ -71,6 +72,12 @@ class Posts
   def self.find_by_hashtag(hashtag)
     client = create_db_client
     result = client.query("SELECT * FROM posts WHERE content LIKE '%#{hashtag}%'")
+    convert_sql_result_to_array(result)
+  end
+
+  def self.find_by_hashtag_last_hours(hashtag, hours = 24)
+    client = create_db_client
+    result = client.query("SELECT * FROM posts WHERE content LIKE '%#{hashtag}%' AND created_at > DATE_SUB(NOW(), INTERVAL #{hours} HOUR)")
     convert_sql_result_to_array(result)
   end
 
