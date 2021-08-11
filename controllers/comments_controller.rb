@@ -16,4 +16,16 @@ class CommentsController
     end
     false
   end
+
+  def find_by_id(id)
+    Comments.find_by_id(id)
+  end
+
+  def find_by_post_id(post_id)
+    Comments.find_by_post_id(post_id)
+  end
+
+  def find_all
+    Comments.find_all
+  end
 end

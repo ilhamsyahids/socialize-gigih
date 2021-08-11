@@ -60,4 +60,35 @@ describe CommentsController do
       end
     end
   end
+
+  describe 'searching' do
+    context '#find_all' do
+      it 'should valid' do
+        expect($comments_controller.find_all).to eq([])
+
+        $comments_controller.create_comment({ post_id: 1, user_id: 1, content: '#database' })
+
+        expect($comments_controller.find_all.length).to eq(1)
+      end
+    end
+
+    context '#find_by_post_id' do
+      it 'should valid' do
+        expect($comments_controller.find_by_post_id(1)).to eq([])
+        $comments_controller.create_comment({ post_id: 1, user_id: 1, content: '#database' })
+        expect($comments_controller.find_by_post_id(1).length).to eq(1)
+      end
+    end
+
+    context '#find_by_id' do
+      it 'should valid' do
+        expect($comments_controller.find_by_id(1)).to eq(nil)
+        $comments_controller.create_comment({ post_id: 1, user_id: 1, content: '#database' })
+        post = $comments_controller.find_by_id(1)
+
+        expect(post.user_id).to eq(1)
+        expect(post.content).to eq('#database')
+      end
+    end
+  end
 end
