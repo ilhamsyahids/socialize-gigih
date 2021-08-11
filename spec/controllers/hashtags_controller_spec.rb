@@ -28,6 +28,38 @@ describe HashtagsController do
         expect(hashtag.counter).to eq(1)
       end
     end
+
+    describe 'when already exists' do
+      context 'in last 24 hours' do
+        it 'should increment counter' do
+          content = '#database'
+
+          $hashtags_controller.create(content)
+          $hashtags_controller.create(content)
+
+          hashtag = Hashtags.find_by_content(content)
+
+          expect(hashtag).to_not be_nil
+          expect(hashtag.content).to eq(content)
+          expect(hashtag.counter).to eq(2)
+        end
+      end
+
+      context 'out last 24 hours' do
+        it 'should reset counter' do
+          $client.query("INSERT INTO hashtags (content, counter, updated_at) VALUES ('#database', 1, NOW() - INTERVAL 24 HOUR - INTERVAL 1 SECOND)")
+          content = '#database'
+
+          $hashtags_controller.create(content)
+
+          hashtag = Hashtags.find_by_content(content)
+
+          expect(hashtag).to_not be_nil
+          expect(hashtag.content).to eq(content)
+          expect(hashtag.counter).to eq(1)
+        end
+      end
+    end
   end
 
 end
