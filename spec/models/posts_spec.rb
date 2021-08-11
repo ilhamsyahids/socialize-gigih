@@ -299,6 +299,38 @@ describe Posts do
     end
   end
 
+  describe 'add comment' do
+    before(:each) do
+      $client.query("TRUNCATE comments")
+    end
+
+    context '#add_comment' do
+      it 'should insert into table' do
+        post = Posts.new({
+          id: 1
+        })
+
+        response = post.add_comment({
+          user_id: 1,
+          content: 'Haloo',
+          attachment: 'png/a.png',
+          attachment_name: 'aws.png'
+        })
+        expect(response).to be_truthy
+        
+        result = $client.query("SELECT * FROM comments")
+
+        expect(result.size).to eq(1)
+
+        expect(result.first["content"]).to eq('Haloo')
+        expect(result.first["attachment"]).to eq('png/a.png')
+        expect(result.first["attachment_name"]).to eq('aws.png')
+        expect(result.first["user_id"]).to eq(1)
+        expect(result.first["post_id"]).to eq(1)
+      end
+    end
+  end
+
   describe "searching" do
     context "#find_all" do
       it 'should have correct query' do

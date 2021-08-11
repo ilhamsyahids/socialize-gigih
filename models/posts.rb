@@ -2,7 +2,7 @@
 require_relative '../db/db_connector.rb'
 
 class Posts
-  attr_accessor :id, :user_id, :content, :created_at, :updated_at, :attachment, :attachment_name
+  attr_accessor :id, :user_id, :content, :created_at, :updated_at, :attachment, :attachment_name, :comments
 
   def initialize(params = {})
     @id = params[:id]
@@ -12,6 +12,7 @@ class Posts
     @updated_at = params[:updated_at]
     @attachment = params[:attachment]
     @attachment_name = params[:attachment_name]
+    @comments = []
   end
 
   def save
@@ -42,6 +43,11 @@ class Posts
   def self.remove_by_id(id)
     Posts.new({ id: id }).delete
     true
+  end
+
+  def add_comment(params)
+    params[:post_id] = @id
+    Comments.new(params).save
   end
 
   def self.find_all
