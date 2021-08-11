@@ -180,4 +180,48 @@ describe Comments do
     end
   end
 
+  describe "update" do
+    context "#update" do
+      it "should have correct query" do
+        model = Comments.new({
+          id: 1,
+          post_id: 1,
+          user_id: 1,
+          content: 'a',
+          attachment: 'png/a.png'
+        })
+
+        mock_client = double
+        allow(Mysql2::Client).to receive(:new).and_return(mock_client)
+        expect(mock_client).to receive(:query).with("UPDATE comments SET content = '#{model.content}', attachment = '#{model.attachment}', updated_at = NOW() WHERE id = #{model.id}")
+
+        expect(model.update).to be_truthy
+      end
+
+      it "should updated in database" do
+        model = Comments.new({
+          post_id: 1,
+          user_id: 1,
+          attachment: 'png/a.png',
+          content: "ini adalah #database"
+        })
+
+        model.save
+
+        model.id = 1
+        model.content = "ini merupakan #mysql"
+        model.attachment = 'jpg/j.jpg'
+
+        model.update
+
+        posts = $client.query("SELECT * FROM comments")
+        
+        first_model = posts.first
+
+        expect(first_model["content"]).to eq("ini merupakan #mysql")
+        expect(first_model["attachment"]).to eq('jpg/j.jpg')
+      end
+    end
+  end
+
 end
