@@ -1,4 +1,5 @@
 
 def find_hashtag(text)
-  text.scan(/\#\w+/).map(&:downcase)
+  array = text.scan(/\#\w+/).map(&:downcase)
+  array = array.uniq
 end

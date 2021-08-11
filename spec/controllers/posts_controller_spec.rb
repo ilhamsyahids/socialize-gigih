@@ -22,7 +22,7 @@ describe PostsController do
       it 'should create post' do
         params = {
           user_id: 1,
-          content: "#database",
+          content: "#database #database",
           attachment: 'png/a.png',
           attachment_name: 'aws.png'
         }
@@ -35,7 +35,7 @@ describe PostsController do
 
         expect(post).to_not be_nil
         expect(post.user_id).to eq(1)
-        expect(post.content).to eq("#database")
+        expect(post.content).to eq("#database #database")
         expect(post.attachment).to eq('png/a.png')
         expect(post.attachment_name).to eq('aws.png')
 
