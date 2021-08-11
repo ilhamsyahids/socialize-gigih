@@ -9,21 +9,15 @@ describe PostsController do
 
     $client = create_db_client
     $client.query("TRUNCATE posts")
+    $client.query("TRUNCATE hashtags")
   end
 
   after(:all) do
     $client.query("TRUNCATE posts")
+    $client.query("TRUNCATE hashtags")
   end
 
   describe '#create' do
-    before(:each) do
-      $client.query("TRUNCATE hashtags")
-    end
-
-    after(:all) do
-      $client.query("TRUNCATE hashtags")
-    end
-
     context 'when given valid params' do
       it 'should create post' do
         params = {
@@ -94,6 +88,40 @@ describe PostsController do
 
         expect(post.user_id).to eq(1)
         expect(post.content).to eq('#database')
+      end
+    end
+  end
+
+  describe '#delete_post' do
+    context 'when post in last 24 hours' do
+      it 'should delete post and the hashtags' do
+        params = {
+          user_id: 1,
+          content: "aa #database",
+          attachment: 'png/a.png',
+          attachment_name: 'aws.png'
+        }
+
+        id = $posts_controller.create_post(params)
+
+        $posts_controller.delete_post(id)
+
+        hashtag = Hashtags.find_by_content('#database')
+
+        expect(hashtag.counter).to eq(0)
+      end
+    end
+
+    context 'when post out last 24 hours' do
+      it 'should delete post, not delete hashtags' do
+        $client.query("INSERT INTO posts (user_id, content, attachment, attachment_name, created_at) VALUES (1, '#database', '', '', NOW() - INTERVAL 24 HOUR - INTERVAL 1 SECOND)")
+        HashtagsController.create('#database')
+
+        $posts_controller.delete_post(1)
+
+        hashtag = Hashtags.find_by_content('#database')
+
+        expect(hashtag.counter).to eq(1)
       end
     end
   end

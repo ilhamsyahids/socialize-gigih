@@ -32,4 +32,16 @@ class PostsController
   def find_all
     Posts.find_all
   end
+
+  def delete_post(id)
+    post = find_by_id(id)
+    time_now = Time.now
+    time_diff = time_now - post.created_at
+    if time_diff.to_i < (24 * 60 * 60)
+      find_hashtag(post.content).each do |hashtag|
+        HashtagsController.decrement_counter(hashtag)
+      end
+    end
+    Posts.remove_by_id(id)
+  end
 end
