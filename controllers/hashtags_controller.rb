@@ -2,7 +2,7 @@
 require_relative '../models/hashtags.rb'
 
 class HashtagsController
-  def create(content)
+  def self.create(content)
     hashtag = Hashtags.find_by_content(content)
 
     if hashtag.nil?
@@ -14,7 +14,7 @@ class HashtagsController
     end
   end
 
-  def decrement_counter(content)
+  def self.decrement_counter(content)
     Hashtags.new({ :content => content }).min_counter
   end
 end

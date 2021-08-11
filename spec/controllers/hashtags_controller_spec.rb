@@ -4,7 +4,7 @@ require_relative '../../controllers/hashtags_controller.rb'
 
 describe HashtagsController do
   before(:each) do
-    $hashtags_controller = HashtagsController.new
+    $hashtags_controller = HashtagsController
 
     $client = create_db_client
     $client.query("TRUNCATE hashtags")
