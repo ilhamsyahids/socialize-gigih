@@ -24,7 +24,7 @@ describe Posts do
             content: 'new post'
           })
   
-          expect(model.valid_url?).to be_truthy
+          expect(model.valid_attachment?).to be_truthy
         end
 
         it 'should valid with correct url' do
@@ -32,10 +32,11 @@ describe Posts do
             id: 1,
             user_id: 1,
             content: 'new post',
-            url: 'http://example.com'
+            attachment: 'png/a.png',
+            attachment_name: 'aaaa.png'
           })
   
-          expect(model.valid_url?).to be_truthy
+          expect(model.valid_attachment?).to be_truthy
         end
 
         it 'should invalid with invalid url' do
@@ -43,10 +44,10 @@ describe Posts do
             id: 1,
             user_id: 1,
             content: 'new post',
-            url: 'http://example .com'
+            attachment: 'png/' + ('a' * 252)
           })
   
-          expect(model.valid_url?).to be_falsey
+          expect(model.valid_attachment?).to be_falsey
         end
       end
 
@@ -146,7 +147,7 @@ describe Posts do
           id: 1,
           user_id: 1,
           content: 'new post',
-          url: 'http://example.com'
+          url: 'png/a.png'
         })
 
         expect(model.valid?).to be_truthy
@@ -164,7 +165,7 @@ describe Posts do
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("INSERT INTO posts (user_id, content, url) VALUES (#{model.user_id}, '#{model.content}', '#{model.url}')")
+        expect(mock_client).to receive(:query).with("INSERT INTO posts (user_id, content, attachment, attachment_name) VALUES (#{model.user_id}, '#{model.content}', '#{model.attachment}', '#{model.attachment_name}')")
 
         expect(model.save).to be_truthy
       end
@@ -184,7 +185,8 @@ describe Posts do
 
         expect(first_model["content"]).to eq("a")
         expect(first_model["user_id"]).to eq(1)
-        expect(first_model["url"]).to eq('')
+        expect(first_model["attachment_name"]).to eq('')
+        expect(first_model["attachment"]).to eq('')
       end
     end
   end
@@ -193,14 +195,16 @@ describe Posts do
     context "#update" do
       it "should have correct query" do
         model = Posts.new({
+          user_id: 1,
           id: 1,
           content: "#database",
-          url: 'http://example.com'
+          attachment: 'png/a.png',
+          attachment_name: 'aws.png'
         })
 
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("UPDATE posts SET content = '#{model.content}', url = '#{model.url}' WHERE id = #{model.id}")
+        expect(mock_client).to receive(:query).with("UPDATE posts SET content = '#{model.content}', attachment = '#{model.attachment}', attachment_name = '#{model.attachment_name}', updated_at = NOW() WHERE id = #{model.id}")
 
         expect(model.update).to be_truthy
       end
@@ -215,7 +219,7 @@ describe Posts do
 
         model.id = 1
         model.content = "ini merupakan #mysql"
-        model.url = 'http://example.com'
+        model.attachment = 'png/a.png'
 
         model.update
 
@@ -224,7 +228,7 @@ describe Posts do
         first_model = posts.first
 
         expect(first_model["content"]).to eq("ini merupakan #mysql")
-        expect(first_model["url"]).to eq('http://example.com')
+        expect(first_model["attachment"]).to eq('png/a.png')
       end
     end
   end
@@ -245,7 +249,7 @@ describe Posts do
         model = Posts.new({
           user_id: 1,
           content: "database",
-          url: 'http://example.com'
+          url: 'png/a.png'
         })
 
         model.save
@@ -278,7 +282,7 @@ describe Posts do
           id: 1,
           user_id: 1,
           content: 'aaa',
-          url: 'http://example.com'
+          url: 'png/a.png'
         })
 
         model.save
@@ -308,7 +312,8 @@ describe Posts do
         model = Posts.new({
           user_id: 1,
           content: "ini adalah #database",
-          url: 'http://example.com'
+          attachment: 'png/a.png',
+          attachment_name: 'aws.png'
         })
 
         model.save
@@ -326,13 +331,15 @@ describe Posts do
         expect(first.id).to eq(1)
         expect(first.user_id).to eq(1)
         expect(first.content).to eq("ini adalah #database")
-        expect(first.url).to eq("http://example.com")
+        expect(first.attachment_name).to eq("aws.png")
+        expect(first.attachment).to eq("png/a.png")
 
         last = posts.last
         expect(last.id).to eq(2)
         expect(last.user_id).to eq(2)
         expect(last.content).to eq("ini adalah #mysql")
-        expect(last.url).to eq("")
+        expect(last.attachment_name).to eq("")
+        expect(last.attachment).to eq("")
       end
     end
 
@@ -351,7 +358,7 @@ describe Posts do
         model = Posts.new({
           user_id: 1,
           content: "ini adalah #database",
-          url: 'http://example.com'
+          attachment: 'png/a.png'
         })
 
         model.save
@@ -361,7 +368,7 @@ describe Posts do
         expect(post.id).to eq(1)
         expect(post.user_id).to eq(1)
         expect(post.content).to eq("ini adalah #database")
-        expect(post.url).to eq("http://example.com")
+        expect(post.attachment).to eq("png/a.png")
       end
     end
 
@@ -380,7 +387,7 @@ describe Posts do
         model = Posts.new({
           user_id: 2,
           content: "ini adalah #database",
-          url: 'http://example.com'
+          attachment: 'png/a.png'
         })
 
         model.save
@@ -390,7 +397,7 @@ describe Posts do
         expect(post.id).to eq(1)
         expect(post.user_id).to eq(2)
         expect(post.content).to eq("ini adalah #database")
-        expect(post.url).to eq("http://example.com")
+        expect(post.attachment).to eq("png/a.png")
       end
     end
 
@@ -409,7 +416,7 @@ describe Posts do
         model = Posts.new({
           user_id: 2,
           content: "ini adalah #database",
-          url: 'http://example.com'
+          attachment: 'png/a.png'
         })
 
         model.save
@@ -419,7 +426,7 @@ describe Posts do
         expect(post.id).to eq(1)
         expect(post.user_id).to eq(2)
         expect(post.content).to eq("ini adalah #database")
-        expect(post.url).to eq("http://example.com")
+        expect(post.attachment).to eq("png/a.png")
       end
     end
   end

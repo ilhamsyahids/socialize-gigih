@@ -2,21 +2,23 @@
 require_relative '../db/db_connector.rb'
 
 class Posts
-  attr_accessor :id, :user_id, :content, :created_at, :url
+  attr_accessor :id, :user_id, :content, :created_at, :updated_at, :attachment, :attachment_name
 
   def initialize(params = {})
     @id = params[:id]
     @user_id = params[:user_id]
     @content = params[:content]
     @created_at = params[:created_at]
-    @url = params[:url]
+    @updated_at = params[:updated_at]
+    @attachment = params[:attachment]
+    @attachment_name = params[:attachment_name]
   end
 
   def save
     return false unless valid?
 
     client = create_db_client
-    client.query("INSERT INTO posts (user_id, content, url) VALUES (#{@user_id}, '#{@content}', '#{@url}')")
+    client.query("INSERT INTO posts (user_id, content, attachment, attachment_name) VALUES (#{user_id}, '#{content}', '#{attachment}', '#{attachment_name}')")
     true
   end
 
@@ -25,7 +27,7 @@ class Posts
     return false unless valid_id?
 
     client = create_db_client
-    client.query("UPDATE posts SET content = '#{@content}', url = '#{@url}' WHERE id = #{@id}")
+    client.query("UPDATE posts SET content = '#{@content}', attachment = '#{attachment}', attachment_name = '#{attachment_name}', updated_at = NOW() WHERE id = #{@id}")
     true
   end
 
@@ -71,7 +73,9 @@ class Posts
     result.each do |row|
       data << Posts.new({
         content: row['content'],
-        url: row['url'],
+        attachment: row['attachment'],
+        attachment_name: row['attachment_name'],
+        updated_at: row['updated_at'],
         created_at: row['created_at'],
         user_id: row['user_id'],
         id: row['id']
@@ -80,16 +84,11 @@ class Posts
     data
   end
 
-  def valid_url?
-    return true if @url.nil? || @url.empty?
-
-    regex = "((http|https)://)?(www.)?"
-    regex += "[a-zA-Z0-9@:%._\\+~#?&//=]"
-    regex += "{2,256}\\.[a-z]"
-    regex += "{2,6}\\b([-a-zA-Z0-9@:%"
-    regex += "._\\+~#?&//=]*)";
-
-    return false if @url.match(regex).nil?
+  def valid_attachment?
+    return true if @attachment.nil?
+    return false if @attachment.length > 254
+    return true if @attachment_name.nil?
+    return false if @attachment_name.length > 254
     true
   end
 
@@ -109,8 +108,9 @@ class Posts
   end
 
   def valid?
+    return false unless valid_user?
     return false unless valid_content?
-    return false unless valid_url?
+    return false unless valid_attachment?
     true
   end
 end
