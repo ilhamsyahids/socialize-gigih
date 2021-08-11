@@ -381,7 +381,7 @@ describe Posts do
 
         post = Posts.find_by_user_id(1)
 
-        expect(post).to eq(nil)
+        expect(post).to eq([])
       end
 
       it 'should find by id from table' do
@@ -393,7 +393,7 @@ describe Posts do
 
         model.save
 
-        post = Posts.find_by_user_id(2)
+        post = Posts.find_by_user_id(2).first
 
         expect(post.id).to eq(1)
         expect(post.user_id).to eq(2)
@@ -410,7 +410,7 @@ describe Posts do
 
         post = Posts.find_by_hashtag('#database')
 
-        expect(post).to eq(nil)
+        expect(post).to eq([])
       end
 
       it 'should find by id from table' do
@@ -422,7 +422,7 @@ describe Posts do
 
         model.save
 
-        post = Posts.find_by_hashtag('#database')
+        post = Posts.find_by_hashtag('#database').first
 
         expect(post.id).to eq(1)
         expect(post.user_id).to eq(2)

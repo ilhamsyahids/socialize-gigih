@@ -59,13 +59,13 @@ class Posts
   def self.find_by_user_id(user_id)
     client = create_db_client
     result = client.query("SELECT * FROM posts WHERE user_id = #{user_id}")
-    convert_sql_result_to_array(result)[0]
+    convert_sql_result_to_array(result)
   end
 
   def self.find_by_hashtag(hashtag)
     client = create_db_client
     result = client.query("SELECT * FROM posts WHERE content LIKE '%#{hashtag}%'")
-    convert_sql_result_to_array(result)[0]
+    convert_sql_result_to_array(result)
   end
 
   def self.convert_sql_result_to_array(result)
