@@ -86,6 +86,27 @@ class Comments
     data
   end
 
+  def self.convert_model_to_json(data)
+    {
+      id: data.id,
+      post_id: data.post_id,
+      user_id: data.user_id,
+      content: data.content,
+      attachment: data.attachment,
+      attachment_name: data.attachment_name,
+      updated_at: data.updated_at,
+      created_at: data.created_at
+    }
+  end
+
+  def self.convert_models_to_json(data)
+    array = []
+    data.each do |row|
+      array << Comments.convert_model_to_json(row)
+    end
+    { comments: array }
+  end
+
   def valid_content?
     return false if @content.nil? || @content.empty? || @content.length > 1000
     true
