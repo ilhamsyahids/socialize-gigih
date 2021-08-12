@@ -84,10 +84,24 @@ describe CommentsController do
       it 'should valid' do
         expect($comments_controller.find_by_id(1)).to eq(nil)
         $comments_controller.create_comment({ post_id: 1, user_id: 1, content: '#database' })
-        post = $comments_controller.find_by_id(1)
+        comment = $comments_controller.find_by_id(1)
 
-        expect(post.user_id).to eq(1)
-        expect(post.content).to eq('#database')
+        expect(comment.user_id).to eq(1)
+        expect(comment.content).to eq('#database')
+      end
+    end
+
+    context '#find_by_hashtag' do
+      it 'should valid' do
+        expect($comments_controller.find_by_hashtag('database')).to eq([])
+        expect($comments_controller.find_by_hashtag('mysql')).to eq([])
+        $comments_controller.create_comment({ post_id: 1, user_id: 1, content: '#database #mysql' })
+
+        expect($comments_controller.find_by_hashtag('data').length).to eq(0)
+        expect($comments_controller.find_by_hashtag('base').length).to eq(0)
+        expect($comments_controller.find_by_hashtag('database').length).to eq(1)
+        expect($comments_controller.find_by_hashtag('m').length).to eq(0)
+        expect($comments_controller.find_by_hashtag('mysql').length).to eq(1)
       end
     end
   end
