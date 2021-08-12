@@ -92,8 +92,47 @@ post '/users' do
     end
   rescue => exception
     status 400
-    message = exception.message
+    message = exception.message || 'Bad request'
+  else
+    puts exception
+    puts exception.message
   ensure
     return response_generator(status, message, options)
+  end
+end
+
+put '/users/:id' do
+  begin
+    raise "Bad request id" if params[:id].nil? || params[:id].to_i < 1
+
+    raise "Email required" if @request_payload[:email].nil?
+    raise "Username required" if @request_payload[:username].nil?
+
+    raise 'User not found' if $users_controller.find_users_by_id(params[:id]).nil?
+
+    if $users_controller.edit_user(@request_payload.merge(:id => params[:id].to_i))
+      message = 'User successfully updated'
+    else
+      raise
+    end
+  rescue Mysql2::Error => exception
+    if exception.message.start_with?('Duplicate entry')
+      status 409
+      if exception.message.include?('email')
+        message = 'Email already exists'
+      elsif exception.message.include?('username')
+        message = 'Username already exists'
+      else
+        message = 'User already exists'
+      end
+    end
+  rescue => exception
+    status 400
+    message = exception.message || 'Bad request'
+  else
+    puts exception
+    puts exception.message
+  ensure
+    return response_generator(status, message)
   end
 end
