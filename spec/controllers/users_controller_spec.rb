@@ -163,6 +163,14 @@ describe UsersController do
         end
       end
 
+      context 'when no user' do
+        it 'should not find user' do
+          user = $users_controller.find_users_with_posts_by_id(1)
+
+          expect(user).to eq(nil)
+        end
+      end
+
       context 'when have post' do
         it 'should find user with posts' do
           params = {

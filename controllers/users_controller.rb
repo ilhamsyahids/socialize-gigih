@@ -21,7 +21,7 @@ class UsersController
 
   def find_users_with_posts_by_id(id)
     user = Users.find_by_id(id)
-    user.posts = Posts.find_by_user_id(user.id)
+    user.posts = Posts.find_by_user_id(user.id) if not user.nil?
     user
   end
 
