@@ -218,6 +218,23 @@ describe UsersController do
       end
     end
 
+    context 'when no user' do
+      it 'should edited' do
+        params = {
+          id: 1,
+          username: 'ilham',
+          email: 'foo@bar.com',
+          bio: 'Haloo'
+        }
+
+        $users_controller.edit_user(params)
+
+        user = $users_controller.find_users_by_id(1)
+  
+        expect(user).to eq(nil)
+      end
+    end
+
     context 'when edit username' do
       it 'should edited' do
         params = {
