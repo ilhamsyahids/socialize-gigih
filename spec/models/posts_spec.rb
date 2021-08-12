@@ -438,9 +438,9 @@ describe Posts do
       it 'should have correct query' do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content LIKE '%#database%'")
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content REGEXP '#database[^a-zA-Z0-9]|#database$'")
 
-        post = Posts.find_by_hashtag('#database')
+        post = Posts.find_by_hashtag('database')
 
         expect(post).to eq([])
       end
@@ -454,12 +454,26 @@ describe Posts do
 
         model.save
 
-        post = Posts.find_by_hashtag('#database').first
+        post = Posts.find_by_hashtag('database').first
 
         expect(post.id).to eq(1)
         expect(post.user_id).to eq(2)
         expect(post.content).to eq("ini adalah #database")
         expect(post.attachment).to eq("png/a.png")
+      end
+
+      it '#database should not return with #data' do
+        model = Posts.new({
+          user_id: 2,
+          content: "ini #database adalah #database",
+          attachment: 'png/a.png'
+        })
+
+        model.save
+
+        posts = Posts.find_by_hashtag('data')
+
+        expect(posts.length).to eq(0)
       end
     end
 
@@ -467,9 +481,9 @@ describe Posts do
       it 'should have correct query' do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content LIKE '%#database%' AND created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)")
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content REGEXP '#database[^a-zA-Z0-9]|#database$' AND created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)")
 
-        post = Posts.find_by_hashtag_last_hours('#database')
+        post = Posts.find_by_hashtag_last_hours('database')
 
         expect(post).to eq([])
       end
@@ -478,7 +492,7 @@ describe Posts do
         $client.query("INSERT INTO posts (user_id, content, attachment, attachment_name, created_at) VALUES (2, 'ini adalah #database', 'png/a.png', 'aws.png', DATE_SUB(NOW(), INTERVAL 23 HOUR))")
         $client.query("INSERT INTO posts (user_id, content, attachment, attachment_name, created_at) VALUES (2, 'ini adalah #database', 'png/a.png', 'aws.png', DATE_SUB(NOW(), INTERVAL 25 HOUR))")
 
-        posts = Posts.find_by_hashtag_last_hours('#database')
+        posts = Posts.find_by_hashtag_last_hours('database')
 
         expect(posts.length).to eq(1)
 
