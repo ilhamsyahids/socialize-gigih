@@ -397,9 +397,9 @@ describe Comments do
       it 'should have correct query' do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE content LIKE '%#database%'")
+        expect(mock_client).to receive(:query).with("SELECT * FROM comments WHERE content REGEXP '#database[^a-zA-Z0-9]|#database$'")
 
-        posts = Comments.find_by_hashtag('#database')
+        posts = Comments.find_by_hashtag('database')
 
         expect(posts).to eq([])
       end
@@ -413,7 +413,7 @@ describe Comments do
 
         model.save
 
-        post = Comments.find_by_hashtag('#database').first
+        post = Comments.find_by_hashtag('database').first
 
         expect(post.id).to eq(1)
         expect(post.post_id).to eq(2)

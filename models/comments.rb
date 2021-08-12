@@ -65,7 +65,7 @@ class Comments
 
   def self.find_by_hashtag(hashtag)
     client = create_db_client
-    result = client.query("SELECT * FROM comments WHERE content LIKE '%#{hashtag}%'")
+    result = client.query("SELECT * FROM comments WHERE content REGEXP '##{hashtag}[^a-zA-Z0-9]|##{hashtag}$'")
     convert_sql_result_to_array(result)
   end
 
