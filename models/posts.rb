@@ -81,6 +81,26 @@ class Posts
     convert_sql_result_to_array(result)
   end
 
+  def self.convert_model_to_json(data)
+    {
+      id: data.id,
+      user_id: data.user_id,
+      content: data.content,
+      attachment: data.attachment,
+      attachment_name: data.attachment_name,
+      updated_at: data.updated_at,
+      created_at: data.created_at
+    }
+  end
+
+  def self.convert_models_to_json(data)
+    array = []
+    data.each do |row|
+      array << Posts.convert_model_to_json(row)
+    end
+    { posts: array }
+  end
+
   def self.convert_sql_result_to_array(result)
     data = []
     result.each do |row|
