@@ -31,3 +31,8 @@ get '/posts/id/:id' do
     .convert_model_to_json(post)
   response_generator(status, message, post)
 end
+
+get '/posts/user_id/:id' do
+  posts = $posts_controller.find_by_user_id(params[:id])
+  response_generator(status, nil, Posts.convert_models_to_json(posts))
+end
