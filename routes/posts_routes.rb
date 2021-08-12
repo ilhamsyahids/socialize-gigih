@@ -36,3 +36,13 @@ get '/posts/user_id/:id' do
   posts = $posts_controller.find_by_user_id(params[:id])
   response_generator(status, nil, Posts.convert_models_to_json(posts))
 end
+
+get '/posts/hashtag/:hashtag' do
+  posts = $posts_controller.find_by_hashtag(params[:hashtag])
+  response_generator(status, nil, Posts.convert_models_to_json(posts))
+end
+
+get '/posts' do
+  posts = Posts.find_all
+  response_generator(status, nil, Posts.convert_models_to_json(posts))
+end
