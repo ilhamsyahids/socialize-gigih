@@ -17,6 +17,12 @@ class PostsController
     false
   end
 
+  def find_with_comments_by_id(id)
+    post = Posts.find_by_id(id)
+    post.comments = Comments.find_by_post_id(id) if not post.nil?
+    post
+  end
+
   def find_by_id(id)
     Posts.find_by_id(id)
   end

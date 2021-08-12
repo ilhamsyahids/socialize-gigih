@@ -10,10 +10,12 @@ describe PostsController do
     $client = create_db_client
     $client.query("TRUNCATE posts")
     $client.query("TRUNCATE hashtags")
+    $client.query("TRUNCATE comments")
   end
 
   after(:all) do
     $client.query("TRUNCATE posts")
+    $client.query("TRUNCATE comments")
     $client.query("TRUNCATE hashtags")
   end
 
@@ -88,6 +90,50 @@ describe PostsController do
 
         expect(post.user_id).to eq(1)
         expect(post.content).to eq('#database')
+      end
+    end
+
+    describe '#find_users_with_posts_by_id' do
+      context 'when no comment' do
+        it 'should find post without comments' do
+          params = { user_id: 1, content: '#database' }
+
+          id = $posts_controller.create_post(params)
+
+          post = $posts_controller.find_with_comments_by_id(id)
+
+          expect(post.comments).to eq([])
+        end
+      end
+
+      context 'when no post' do
+        it 'should not find post' do
+          post = $posts_controller.find_with_comments_by_id(1)
+
+          expect(post).to eq(nil)
+        end
+      end
+
+      context 'when have post' do
+        it 'should find user with posts' do
+          id = Posts.new({
+            user_id: 1,
+            content: 'when'
+          }).save
+
+          Comments.new({
+            post_id: 1,
+            user_id: 1,
+            content: "#aa"
+          }).save
+
+          post = $posts_controller.find_with_comments_by_id(id)
+
+          expect(post.comments.length).to eq(1)
+          expect(post.comments[0].post_id).to eq(1)
+          expect(post.comments[0].user_id).to eq(1)
+          expect(post.comments[0].content).to eq('#aa')
+        end
       end
     end
   end
