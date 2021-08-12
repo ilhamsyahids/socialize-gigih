@@ -46,3 +46,28 @@ get '/posts' do
   posts = Posts.find_all
   response_generator(status, nil, Posts.convert_models_to_json(posts))
 end
+
+post '/posts' do
+  begin
+    options = {}
+    raise "User id required" if @request_payload[:user_id].nil?
+    raise "Content required" if @request_payload[:content].nil?
+    raise "Content more than 1000 characters" if @request_payload[:content].length > 1000
+    id = $posts_controller.create_post(@request_payload)
+    if id
+      status 201
+      message = 'Post created'
+      options[:id] = id
+    else
+      raise "Bad request"
+    end
+  rescue => exception
+    status 400
+    message = exception.message || 'Bad request'
+  else
+    puts exception
+    puts exception.message
+  ensure
+    return response_generator(status, message, options)
+  end
+end
