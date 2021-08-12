@@ -53,6 +53,22 @@ class Hashtags
     convert_sql_result_to_array(result)
   end
 
+  def self.convert_model_to_json(data)
+    {
+      content: data.content,
+      updated_at: data.updated_at,
+      counter: data.counter
+    }
+  end
+
+  def self.convert_models_to_json(data)
+    array = []
+    data.each do |row|
+      array << Hashtags.convert_model_to_json(row)
+    end
+    { hashtags: array }
+  end
+
   def valid?
     return false if @content.nil?
     return false if @content.length < 2
