@@ -77,7 +77,6 @@ class Users
   def valid?
     return false if @username.nil?
     return false unless valid_email?
-    return false if @bio.nil?
     true
   end
 
