@@ -110,6 +110,13 @@ Example:
 ```
 
 
+## Screenshots
+
+### Coverage
+
+![Coverage](./screenshots/coverage.png)
+
+  
 ## Acknowledgements
 
  - Generasi Gigih
