@@ -1,0 +1,2987 @@
+{
+	"info": {
+		"_postman_id": "d83eb025-1697-490f-9905-583731a05dcb",
+		"name": "Socialize",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get User with Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "274"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 02:53:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"bio\": \"Hai\",\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world!\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 09:36:25 +0700\",\n                \"created_at\": \"2021-08-12 09:36:25 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "User not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found ",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 02:57:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 404,\n    \"message\": \"User not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/id/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users/id/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"id",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 02:58:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"bio\": \"Hai\"\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "User not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users/id/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"id",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found ",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 02:59:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 404,\n    \"message\": \"User not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by Username",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/username/admin1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"username",
+								"admin1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users/username/admin",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"username",
+										"admin"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 02:59:17 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"username\": \"admin\",\n        \"email\": \"admin@example.com\",\n        \"bio\": \"Hai\"\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "User not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users/username/admi",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users",
+										"username",
+										"admi"
+									]
+								}
+							},
+							"status": "Not Found ",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 02:59:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 404,\n    \"message\": \"User not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 03:01:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"users\": [\n            {\n                \"id\": 1,\n                \"username\": \"admin\",\n                \"email\": \"admin@example.com\",\n                \"bio\": \"Hai\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Post User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin1@example.com",
+									"type": "text"
+								},
+								{
+									"key": "bio",
+									"value": "Hai",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "User created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin@example.com",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Hai",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:18:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 4\n    },\n    \"status\": 201,\n    \"message\": \"User created\"\n}"
+						},
+						{
+							"name": "Username already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin@example.com",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Hai",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Conflict ",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:17:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 409,\n    \"message\": \"Username already exists\"\n}"
+						},
+						{
+							"name": "Email already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin1",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin@example.com",
+											"type": "text"
+										},
+										{
+											"key": "bio",
+											"value": "Hai",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/users",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Conflict ",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "57"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:18:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 409,\n    \"message\": \"Email already exists\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get Posts with Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/posts/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "412"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:06:50 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"content\": \"Hello world!\",\n        \"attachment\": \"hello.png\",\n        \"attachment_name\": \"hello.png\",\n        \"updated_at\": \"2021-08-12 22:02:43 +0700\",\n        \"created_at\": \"2021-08-12 22:02:43 +0700\",\n        \"comments\": [\n            {\n                \"id\": 1,\n                \"post_id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world!\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 22:06:47 +0700\",\n                \"created_at\": \"2021-08-12 22:06:47 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "Post not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"1"
+									]
+								}
+							},
+							"status": "Not Found ",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:02:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 404,\n    \"message\": \"Post not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Post by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/posts/id/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"posts",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/id/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"id",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:10:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 1,\n        \"content\": \"Hello world!\",\n        \"attachment\": \"hello.png\",\n        \"attachment_name\": \"hello.png\",\n        \"updated_at\": \"2021-08-12 22:02:43 +0700\",\n        \"created_at\": \"2021-08-12 22:02:43 +0700\"\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "Post not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/id/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"id",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found ",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:11:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 404,\n    \"message\": \"Post not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Posts by User Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/posts/user_id/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"posts",
+								"user_id",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/user_id/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"user_id",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world!\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 22:02:43 +0700\",\n                \"created_at\": \"2021-08-12 22:02:43 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "No post",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/user_id/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"user_id",
+										"2"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": []\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Posts by Hashtag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/posts/hashtag/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"posts",
+								"hashtag",
+								"database"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/hashtag/database",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"hashtag",
+										"database"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world! #database #mysql\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 23:58:54 +0700\",\n                \"created_at\": \"2021-08-12 23:58:54 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "No post",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/hashtag/data",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"hashtag",
+										"data"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": []\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Posts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/posts",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world! #database #mysql\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 23:58:54 +0700\",\n                \"created_at\": \"2021-08-12 23:58:54 +0700\"\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"content\": \"Hello world! #database #mysql\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-13 00:00:46 +0700\",\n                \"created_at\": \"2021-08-13 00:00:46 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "No post",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": []\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "ini adalah content ku #database ",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/sayurbox/Documents/Unity_lic.alf"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/posts",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database ",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:12:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2\n    },\n    \"status\": 201,\n    \"message\": \"Post created\"\n}"
+						},
+						{
+							"name": "No user id",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database ",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:12:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 400,\n    \"message\": \"User id required\"\n}"
+						},
+						{
+							"name": "No content",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database ",
+											"type": "text",
+											"disabled": true
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:12:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 400,\n    \"message\": \"Content required\"\n}"
+						},
+						{
+							"name": "Limit content",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Bad Request ",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 18:37:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 400,\n    \"message\": \"Content more than 1000 characters\"\n}"
+						},
+						{
+							"name": "Create Post with File",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database ",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/sayurbox/Desktop/Screen Shot 2021-07-23 at 20.02.39.png"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/posts",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 15:38:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 3\n    },\n    \"status\": 201,\n    \"message\": \"Post created\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get Comment by Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/comments/id/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comments",
+								"id",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/comments/id/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments",
+										"id",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:10:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1,\n        \"post_id\": 1,\n        \"user_id\": 1,\n        \"content\": \"Haloo\",\n        \"attachment\": \"png/a.png\",\n        \"attachment_name\": \"aws.png\",\n        \"updated_at\": \"2021-08-13 01:27:29 +0700\",\n        \"created_at\": \"2021-08-13 01:27:29 +0700\"\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "Comment not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/comments/id/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments",
+										"id",
+										"2"
+									]
+								}
+							},
+							"status": "Not Found ",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "51"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:11:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 404,\n    \"message\": \"Comment not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Comments by Post Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/comments/post_id/1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comments",
+								"post_id",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/comments/post_id/1",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments",
+										"post_id",
+										"1"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"comments\": [\n            {\n                \"id\": 1,\n                \"post_id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Haloo\",\n                \"attachment\": \"png/a.png\",\n                \"attachment_name\": \"aws.png\",\n                \"updated_at\": \"2021-08-13 01:27:29 +0700\",\n                \"created_at\": \"2021-08-13 01:27:29 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "No comments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/comments/post_id/2",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments",
+										"post_id",
+										"2"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"comments\": []\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Comments by Hashtag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/comments/hashtag/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comments",
+								"hashtag",
+								"database"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/hashtag/database",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"hashtag",
+										"database"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world! #database #mysql\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 23:58:54 +0700\",\n                \"created_at\": \"2021-08-12 23:58:54 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "No comments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/posts/hashtag/data",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"posts",
+										"hashtag",
+										"data"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": []\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/comments",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "216"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello world! #database #mysql\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-12 23:58:54 +0700\",\n                \"created_at\": \"2021-08-12 23:58:54 +0700\"\n            },\n            {\n                \"id\": 2,\n                \"user_id\": 1,\n                \"content\": \"Hello world! #database #mysql\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-13 00:00:46 +0700\",\n                \"created_at\": \"2021-08-13 00:00:46 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						},
+						{
+							"name": "No comments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 15:17:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": []\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "post_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "ini adalah content ku #database #mysql",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/sayurbox/Desktop/Screen Shot 2021-07-23 at 18.01.01.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/comments",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"comments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Comment created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database #mysql",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 17:05:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1\n    },\n    \"status\": 201,\n    \"message\": \"Comment created\"\n}"
+						},
+						{
+							"name": "Limit content",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 17:05:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 400,\n    \"message\": \"Content more than 1000 characters\"\n}"
+						},
+						{
+							"name": "User id required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database #mysql",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 17:05:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 1\n    },\n    \"status\": 201,\n    \"message\": \"User id required\"\n}"
+						},
+						{
+							"name": "Post id required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database #mysql",
+											"type": "text"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "Bad Request ",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 17:07:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 400,\n    \"message\": \"Post id required\"\n}"
+						},
+						{
+							"name": "Content required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database #mysql",
+											"type": "text",
+											"disabled": true
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "Bad Request ",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "53"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 17:07:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"status\": 400,\n    \"message\": \"Content required\"\n}"
+						},
+						{
+							"name": "Comment created with file",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "user_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "post_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "content",
+											"value": "ini adalah content ku #database #mysql",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/Users/sayurbox/Desktop/Screen Shot 2021-07-23 at 18.01.01.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{baseurl}}/comments",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"comments"
+									]
+								}
+							},
+							"status": "Created ",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "58"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 17:09:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2\n    },\n    \"status\": 201,\n    \"message\": \"Comment created\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Hashtags",
+			"item": [
+				{
+					"name": "Trending Hashtags",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/hashtags/trending",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"hashtags",
+								"trending"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Trending Hashtags",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/hashtags/trending",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"hashtags",
+										"trending"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 19:20:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"hashtags\": [\n            {\n                \"content\": \"#database\",\n                \"updated_at\": \"2021-08-13 01:59:11 +0700\",\n                \"counter\": 3\n            },\n            {\n                \"content\": \"#mysql\",\n                \"updated_at\": \"2021-08-13 01:59:11 +0700\",\n                \"counter\": 3\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Trending Hashtags by content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/hashtags/trending/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"hashtags",
+								"trending",
+								"database"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Trending Hashtags by content",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/hashtags/trending/database",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"hashtags",
+										"trending",
+										"database"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "436"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 13 Aug 2021 02:51:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"ini adalah content ku #database \",\n                \"attachment\": \"\",\n                \"attachment_name\": \"\",\n                \"updated_at\": \"2021-08-13 09:46:22 +0700\",\n                \"created_at\": \"2021-08-13 09:46:22 +0700\"\n            }\n        ],\n        \"comments\": [\n            {\n                \"id\": 2,\n                \"post_id\": 1,\n                \"user_id\": 1,\n                \"content\": \"Hello#database  world!\",\n                \"attachment\": \"hello.png\",\n                \"attachment_name\": \"hello.png\",\n                \"updated_at\": \"2021-08-13 09:48:54 +0700\",\n                \"created_at\": \"2021-08-13 09:48:54 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Hashtags by content",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/hashtags/content/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"hashtags",
+								"content",
+								"database"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Hashtags by content",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/hashtags/content/database",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"hashtags",
+										"content",
+										"database"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 19:25:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"content\": \"#database\",\n        \"updated_at\": \"2021-08-13 01:59:11 +0700\",\n        \"counter\": 3\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Hashtags with post",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/hashtags/post/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"hashtags",
+								"post",
+								"database"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Hashtags with post",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/hashtags/post/database",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"hashtags",
+										"post",
+										"database"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "224"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 19:29:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"posts\": [\n            {\n                \"id\": 1,\n                \"user_id\": 1,\n                \"content\": \"ini adalah content ku #database #mysql\",\n                \"attachment\": \"\",\n                \"attachment_name\": \"\",\n                \"updated_at\": \"2021-08-13 01:59:11 +0700\",\n                \"created_at\": \"2021-08-13 01:59:11 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Hashtags with comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/hashtags/comment/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"hashtags",
+								"comment",
+								"database"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Hashtags with comment",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseurl}}/hashtags/comment/database",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"hashtags",
+										"comment",
+										"database"
+									]
+								}
+							},
+							"status": "OK ",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "442"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Server",
+									"value": "WEBrick/1.4.2 (Ruby/2.6.3/2019-04-16)"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 12 Aug 2021 19:30:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "Keep-Alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"comments\": [\n            {\n                \"id\": 1,\n                \"post_id\": 1,\n                \"user_id\": 1,\n                \"content\": \"ini adalah content ku #database #mysql\",\n                \"attachment\": \"\",\n                \"attachment_name\": \"\",\n                \"updated_at\": \"2021-08-13 02:01:29 +0700\",\n                \"created_at\": \"2021-08-13 02:01:29 +0700\"\n            },\n            {\n                \"id\": 2,\n                \"post_id\": 1,\n                \"user_id\": 1,\n                \"content\": \"ini adalah content ku #database #mysql\",\n                \"attachment\": \"\",\n                \"attachment_name\": \"\",\n                \"updated_at\": \"2021-08-13 02:03:01 +0700\",\n                \"created_at\": \"2021-08-13 02:03:01 +0700\"\n            }\n        ]\n    },\n    \"status\": 200\n}"
+						}
+					]
+				},
+				{
+					"name": "Hashtags with all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/hashtags/all/database",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"hashtags",
+								"all",
+								"database"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
