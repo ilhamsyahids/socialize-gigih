@@ -2,6 +2,7 @@ require 'sinatra'
 
 require_relative '../controllers/posts_controller.rb'
 
+require_relative '../utils/files.rb'
 require_relative '../utils/response_handler.rb'
 
 $posts_controller = PostsController.new
@@ -53,6 +54,11 @@ post '/posts' do
     raise "User id required" if params[:user_id].nil?
     raise "Content required" if params[:content].nil?
     raise "Content more than 1000 characters" if params[:content].length > 1000
+    if params[:file]
+      saved = save_to_server(params[:file])
+      params[:attachment_name] = saved.first
+      params[:attachment] = saved.last
+    end
     id = $posts_controller.create_post(params)
     if id
       status 201

@@ -2,6 +2,7 @@ require 'sinatra'
 
 require_relative '../controllers/comments_controller.rb'
 
+require_relative '../utils/files.rb'
 require_relative '../utils/response_handler.rb'
 
 $comments_controller = CommentsController.new
@@ -35,11 +36,16 @@ end
 post '/comments' do
   begin
     options = {}
-    raise "Post id required" if @request_payload[:post_id].nil?
-    raise "User id required" if @request_payload[:user_id].nil?
-    raise "Content required" if @request_payload[:content].nil?
-    raise "Content more than 1000 characters" if @request_payload[:content].length > 1000
-    id = $comments_controller.create_comment(@request_payload)
+    raise "Post id required" if params[:post_id].nil?
+    raise "User id required" if params[:user_id].nil?
+    raise "Content required" if params[:content].nil?
+    raise "Content more than 1000 characters" if params[:content].length > 1000
+    if params[:file]
+      saved = save_to_server(params[:file])
+      params[:attachment_name] = saved.first
+      params[:attachment] = saved.last
+    end
+    id = $comments_controller.create_comment(params)
     if id
       status 201
       message = 'Comment created'
