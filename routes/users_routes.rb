@@ -52,9 +52,9 @@ end
 post '/users' do
   begin
     options = {}
-    raise "Email required" if @request_payload[:email].nil?
-    raise "Username required" if @request_payload[:username].nil?
-    id = $users_controller.create_item(@request_payload)
+    raise "Email required" if params[:email].nil?
+    raise "Username required" if params[:username].nil?
+    id = $users_controller.create_item(params)
     if id
       status 201
       message = 'User created'
@@ -88,12 +88,12 @@ put '/users/:id' do
   begin
     raise "Bad request id" if params[:id].nil? || params[:id].to_i < 1
 
-    raise "Email required" if @request_payload[:email].nil?
-    raise "Username required" if @request_payload[:username].nil?
+    raise "Email required" if params[:email].nil?
+    raise "Username required" if params[:username].nil?
 
     raise 'User not found' if $users_controller.find_users_by_id(params[:id]).nil?
 
-    if $users_controller.edit_user(@request_payload.merge(:id => params[:id].to_i))
+    if $users_controller.edit_user(params.merge(:id => params[:id].to_i))
       message = 'User successfully updated'
     else
       raise

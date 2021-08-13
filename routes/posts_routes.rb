@@ -50,10 +50,10 @@ end
 post '/posts' do
   begin
     options = {}
-    raise "User id required" if @request_payload[:user_id].nil?
-    raise "Content required" if @request_payload[:content].nil?
-    raise "Content more than 1000 characters" if @request_payload[:content].length > 1000
-    id = $posts_controller.create_post(@request_payload)
+    raise "User id required" if params[:user_id].nil?
+    raise "Content required" if params[:content].nil?
+    raise "Content more than 1000 characters" if params[:content].length > 1000
+    id = $posts_controller.create_post(params)
     if id
       status 201
       message = 'Post created'
