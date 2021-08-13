@@ -420,6 +420,36 @@ describe Comments do
         expect(post.user_id).to eq(2)
         expect(post.content).to eq("ini adalah #database")
       end
+
+      it 'should find last 24 hours from table' do
+        $client.query("INSERT INTO comments (post_id, user_id, content, created_at) VALUES (1, 4, 'pertama #database #mysql', NOW() - INTERVAL 24 HOUR + INTERVAL 1 SECOND)")
+        $client.query("INSERT INTO comments (post_id, user_id, content, created_at) VALUES (2, 3, 'kedua #database #mysql', NOW() - INTERVAL 1 SECOND)")
+        $client.query("INSERT INTO comments (post_id, user_id, content, created_at) VALUES (3, 2, 'ketiga #database #mysql', NOW() - INTERVAL 24 HOUR - INTERVAL 1 SECOND)")
+
+        Comments.new({
+          post_id: 4,
+          user_id: 1,
+          content: "empat #database #mysql",
+        }).save
+
+        comments = Comments.find_by_hashtag('database', true)
+
+        expect(comments.size).to eq(3)
+
+        comment = comments.first
+
+        expect(comment.id).to eq(4)
+        expect(comment.post_id).to eq(4)
+        expect(comment.user_id).to eq(1)
+        expect(comment.content).to eq("empat #database #mysql")
+
+        comment = comments.last
+
+        expect(comment.id).to eq(1)
+        expect(comment.post_id).to eq(1)
+        expect(comment.user_id).to eq(4)
+        expect(comment.content).to eq("pertama #database #mysql")
+      end
     end
   end
 

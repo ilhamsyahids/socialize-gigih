@@ -63,9 +63,11 @@ class Comments
     convert_sql_result_to_array(result)
   end
 
-  def self.find_by_hashtag(hashtag)
+  def self.find_by_hashtag(hashtag, last_24 = false)
+    query = "SELECT * FROM comments WHERE content REGEXP '##{hashtag}[^a-zA-Z0-9]|##{hashtag}$'"
+    query += "AND created_at >= NOW() - INTERVAL 1 DAY ORDER BY created_at DESC" if last_24
     client = create_db_client
-    result = client.query("SELECT * FROM comments WHERE content REGEXP '##{hashtag}[^a-zA-Z0-9]|##{hashtag}$'")
+    result = client.query(query)
     convert_sql_result_to_array(result)
   end
 

@@ -27,7 +27,8 @@ class PostsController
     Posts.find_by_id(id)
   end
 
-  def find_by_hashtag(hashtag)
+  def find_by_hashtag(hashtag, is_last_24 = false)
+    return Posts.find_by_hashtag_last_hours(hashtag) if is_last_24
     Posts.find_by_hashtag(hashtag)
   end
 

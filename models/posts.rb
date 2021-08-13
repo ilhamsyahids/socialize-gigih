@@ -77,7 +77,7 @@ class Posts
 
   def self.find_by_hashtag_last_hours(hashtag, hours = 24)
     client = create_db_client
-    result = client.query("SELECT * FROM posts WHERE content REGEXP '##{hashtag}[^a-zA-Z0-9]|##{hashtag}$' AND created_at > DATE_SUB(NOW(), INTERVAL #{hours} HOUR)")
+    result = client.query("SELECT * FROM posts WHERE content REGEXP '##{hashtag}[^a-zA-Z0-9]|##{hashtag}$' AND created_at >= DATE_SUB(NOW(), INTERVAL #{hours} HOUR) ORDER BY created_at DESC")
     convert_sql_result_to_array(result)
   end
 

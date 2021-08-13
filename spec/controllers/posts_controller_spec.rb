@@ -77,8 +77,14 @@ describe PostsController do
     context '#find_by_hashtag' do
       it 'should valid' do
         expect($posts_controller.find_by_hashtag('database')).to eq([])
-        $posts_controller.create_post({ user_id: 1, content: '#database' })
+        expect($posts_controller.find_by_hashtag('mysql')).to eq([])
+        $posts_controller.create_post({ user_id: 1, content: '#database #mysql' })
+
+        expect($posts_controller.find_by_hashtag('data').length).to eq(0)
+        expect($posts_controller.find_by_hashtag('base').length).to eq(0)
         expect($posts_controller.find_by_hashtag('database').length).to eq(1)
+        expect($posts_controller.find_by_hashtag('m').length).to eq(0)
+        expect($posts_controller.find_by_hashtag('mysql').length).to eq(1)
       end
     end
 

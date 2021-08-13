@@ -481,7 +481,7 @@ describe Posts do
       it 'should have correct query' do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content REGEXP '#database[^a-zA-Z0-9]|#database$' AND created_at > DATE_SUB(NOW(), INTERVAL 24 HOUR)")
+        expect(mock_client).to receive(:query).with("SELECT * FROM posts WHERE content REGEXP '#database[^a-zA-Z0-9]|#database$' AND created_at >= DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY created_at DESC")
 
         post = Posts.find_by_hashtag_last_hours('database')
 

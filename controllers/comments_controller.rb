@@ -25,8 +25,8 @@ class CommentsController
     Comments.find_by_post_id(post_id)
   end
 
-  def find_by_hashtag(hashtag)
-    Comments.find_by_hashtag(hashtag)
+  def find_by_hashtag(hashtag, is_last_24 = false)
+    Comments.find_by_hashtag(hashtag, is_last_24)
   end
 
   def find_all
