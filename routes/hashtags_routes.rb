@@ -20,11 +20,11 @@ get '/hashtags/content/:content' do
 end
 
 get '/hashtags/post/:content' do
-  response_generator(status, nil, Posts.convert_models_to_json($posts_controller.find_by_hashtag('#' + params[:content])))
+  response_generator(status, nil, Posts.convert_models_to_json($posts_controller.find_by_hashtag(params[:content])))
 end
 
 get '/hashtags/comment/:content' do
-  response_generator(status, nil, Comments.convert_models_to_json($comments_controller.find_by_hashtag('#' + params[:content])))
+  response_generator(status, nil, Comments.convert_models_to_json($comments_controller.find_by_hashtag(params[:content])))
 end
 
 get '/hashtags/all/:content' do
