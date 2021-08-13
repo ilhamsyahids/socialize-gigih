@@ -11,6 +11,13 @@ $posts_controller = PostsController.new
 $comments_controller = CommentsController.new
 
 # Hashtags
+
+get '/hashtags/trending/:content' do
+  posts = Posts.convert_models_to_json($posts_controller.find_by_hashtag(params[:content], true))
+  comments = Comments.convert_models_to_json($comments_controller.find_by_hashtag(params[:content], true))
+  response_generator(status, nil, posts.merge(comments))
+end
+
 get '/hashtags/trending' do
   response_generator(status, nil, Hashtags.convert_models_to_json(Hashtags.trending))
 end
