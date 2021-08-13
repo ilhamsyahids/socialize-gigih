@@ -38,6 +38,9 @@
       shell: $HOME/.rbenv/bin/rbenv install 2.7.1 -s
     - name: Setting ruby 2.7.1 as global
       shell: $HOME/.rbenv/bin/rbenv global 2.7.1
+    - name: Installing mysql2 and sinatra
+      become: yes
+      shell: gem install mysql2 sinatra
     - name: Clone project
       become: yes
       git:
@@ -45,10 +48,6 @@
         depth: "1"
         dest: /socialize
         force: yes
-    - name: Installing dependencies Ruby
-      shell:
-        chdir: /socialize
-        cmd: bundle install
     - name: Creating database user 'gbe01078' and password 'gbe01078' with all privileges
       become: yes
       mysql_user:
