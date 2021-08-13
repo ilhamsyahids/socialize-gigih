@@ -49,7 +49,7 @@ class Hashtags
 
   def self.trending(limit = 5)
     client = create_db_client
-    result = client.query("SELECT * FROM hashtags WHERE counter > 1 AND updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT #{limit}")
+    result = client.query("SELECT * FROM hashtags WHERE counter > 0 AND updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT #{limit}")
     convert_sql_result_to_array(result)
   end
 

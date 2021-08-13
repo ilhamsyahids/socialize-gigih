@@ -171,7 +171,7 @@ describe Hashtags do
       it "should have correct query" do
         mock_client = double
         allow(Mysql2::Client).to receive(:new).and_return(mock_client)
-        expect(mock_client).to receive(:query).with("SELECT * FROM hashtags WHERE counter > 1 AND updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT 5")
+        expect(mock_client).to receive(:query).with("SELECT * FROM hashtags WHERE counter > 0 AND updated_at >= NOW() - INTERVAL 1 DAY ORDER BY counter DESC, updated_at DESC LIMIT 5")
 
         expect(Hashtags.trending).to eq([])
       end
