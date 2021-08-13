@@ -38,9 +38,8 @@
       shell: $HOME/.rbenv/bin/rbenv install 2.7.1 -s
     - name: Setting ruby 2.7.1 as global
       shell: $HOME/.rbenv/bin/rbenv global 2.7.1
-    - name: Installing mysql2 and sinatra
-      become: yes
-      shell: gem install mysql2 sinatra
+    - name: Installing dependencies Ruby
+      shell: bundle install
     - name: Clone project
       become: yes
       git:
