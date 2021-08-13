@@ -48,6 +48,11 @@
         depth: "1"
         dest: /socialize
         force: yes
+    - name: Give permission to user
+      become: yes
+      shell:
+        chdir: /socialize
+        cmd: chown -R gbe01078 .
     - name: Creating database user 'gbe01078' and password 'gbe01078' with all privileges
       become: yes
       mysql_user:
