@@ -81,8 +81,170 @@ To run tests, run the following command
 ```bash
   rspec -f d spec/run_test.rb
 ```
-
   
+## API Reference
+
+### Users
+
+#### Get all users
+
+```http
+  GET /users
+```
+
+#### Get user with posts by id
+
+```http
+  GET /users/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of user to fetch |
+
+#### Get user detail by id
+
+```http
+  GET /users/id/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of user to fetch |
+
+#### Get user detail by username
+
+```http
+  GET /users/username/${username}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `username`      | `string` | **Required**. Username of user to fetch |
+
+#### Create user
+
+```http
+  POST /users
+```
+
+| Parameter  | Type     | Description                       |
+| :--------- | :------- | :-------------------------------- |
+| `email`    | `string` | **Required**. Email of user |
+| `username` | `string` | **Required**. Username of user |
+| `bio`      | `string` | Bio of user |
+
+### Posts
+
+#### Get all posts
+
+```http
+  GET /posts
+```
+
+#### Get post with comments by id
+
+```http
+  GET /posts/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of post to fetch |
+
+#### Get post detail by id
+
+```http
+  GET /posts/id/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of post to fetch |
+
+#### Get posts detail by user_id
+
+```http
+  GET /posts/user_id/${user_id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `user_id` | `string` | **Required**. user_id of post to fetch |
+
+#### Get posts detail by hashtag
+
+```http
+  GET /posts/hashtag/${hashtag}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `hashtag` | `string` | **Required**. hashtag of post to fetch |
+
+#### Create post
+
+```http
+  POST /posts
+```
+
+| Parameter  | Type     | Description                                |
+| :--------- | :------- | :----------------------------------------- |
+| `user_id`  | `string` | **Required**. User Id of post              |
+| `content`  | `string` | **Required**. Content of post (limit 1000) |
+| `file`     | `file`   | Attached file                              |
+
+### Comments
+
+#### Get all Comments
+
+```http
+  GET /comments
+```
+
+#### Get Comment by id
+
+```http
+  GET /comments/id/${id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of comment to fetch |
+
+#### Get Comment by hashtag
+
+```http
+  GET /comments/hashtag/${hashtag}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `hashtag` | `string` | **Required**. hashtag of comment to fetch |
+
+#### Get Comment by post_id
+
+```http
+  GET /comments/post_id/${post_id}
+```
+
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `post_id`      | `string` | **Required**. Post Id of comment to fetch |
+
+#### Create Comment
+
+```http
+  POST /comments
+```
+
+| Parameter  | Type     | Description                                |
+| :--------- | :------- | :----------------------------------------- |
+| `user_id`  | `string` | **Required**. User Id of post              |
+| `post_id`  | `string` | **Required**. Post Id of post              |
+| `content`  | `string` | **Required**. Content of post (limit 1000) |
+| `file`     | `file`   | Attached file                              |
+
 ## Tech Stack
 
 - Ruby
