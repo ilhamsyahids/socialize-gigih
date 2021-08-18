@@ -238,12 +238,12 @@ To run tests, run the following command
   POST /comments
 ```
 
-| Parameter  | Type     | Description                                |
-| :--------- | :------- | :----------------------------------------- |
-| `user_id`  | `string` | **Required**. User Id of post              |
-| `post_id`  | `string` | **Required**. Post Id of post              |
-| `content`  | `string` | **Required**. Content of post (limit 1000) |
-| `file`     | `file`   | Attached file                              |
+| Parameter  | Type     | Description                                   |
+| :--------- | :------- | :-------------------------------------------- |
+| `user_id`  | `string` | **Required**. User Id of comment              |
+| `post_id`  | `string` | **Required**. Post Id of comment              |
+| `content`  | `string` | **Required**. Content of comment (limit 1000) |
+| `file`     | `file`   | Attached file                                 |
 
 ## Tech Stack
 
