@@ -40,7 +40,7 @@
       shell: $HOME/.rbenv/bin/rbenv global 2.7.1
     - name: Installing mysql2 and sinatra
       become: yes
-      shell: gem install mysql2 sinatra
+      shell: gem install mysql2 sinatra sinatra-cross_origin
     - name: Clone project
       become: yes
       git:

@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'sinatra/cross_origin'
 
 require_relative 'routes/users_routes.rb'
 require_relative 'routes/posts_routes.rb'
@@ -7,7 +8,12 @@ require_relative 'routes/hashtags_routes.rb'
 
 require_relative 'utils/response_handler.rb'
 
+configure do
+  enable :cross_origin
+end
+
 before do
+  response.headers['Access-Control-Allow-Origin'] = '*'
   content_type :json
 end
 
